@@ -1,33 +1,30 @@
 import { Dice } from 'model/dice.model';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { GAME_SETTINGS } from '../consts/game-settings.const';
-import { GameContext } from '../store/game-context';
+import { changeDiceAmount, changePoints, changeStats, changeUpgradeCost } from '../store/game-state';
+import { GameState } from '../store/model/game-state.model';
 import DiceBoard from './DiceBoard';
 import ResultModal from './ResultModal';
 
 export default function Game() {
-  const { points, diceAmount, stats, rollCooldown, changePoints, changeDiceAmount, changeStats } =
-    useContext(GameContext);
+  const dispatch = useDispatch();
+  const gameState = useSelector((state: { gamestate: GameState }) => state.gamestate);
   const winDialog = useRef<any>(null);
 
   const [dices, setDices] = useState<Dice[]>([]);
-  const [upgradeCost, setUpgradeCost] = useState(0);
   const [isCooldown, setIsCooldown] = useState(0);
 
   const getRollResult = () => Math.floor(Math.random() * 6) + 1;
-  const getUpgradeCost = () => diceAmount * 10;
-  const checkWinCondition = () => points >= GAME_SETTINGS.winCondition;
-  const checkUpgradeBtnDisabled = () => points < upgradeCost;
+  const getUpgradeCost = () => gameState.diceAmount * 10;
+  const checkWinCondition = () => gameState.points >= GAME_SETTINGS.winCondition;
+  const checkUpgradeBtnDisabled = () => gameState.points < gameState.upgradeCost;
   const checkRollBtnDisabled = () => isCooldown > 0;
 
   if (checkWinCondition()) {
     winDialog.current!.open();
   }
-
-  useEffect(() => {
-    setUpgradeCost(getUpgradeCost);
-  }, [diceAmount, getUpgradeCost]);
 
   useEffect(() => {
     if (isCooldown > 0) {
@@ -41,53 +38,55 @@ export default function Game() {
 
   function handleRollClick() {
     const diceArray = [];
-    for (let i = 0; i < diceAmount; i++) {
+    for (let i = 0; i < gameState.diceAmount; i++) {
       diceArray.push({ id: uuidv4(), diceValue: getRollResult() });
     }
     setDices(diceArray);
     const res = diceArray.reduce((prev, curr) => prev + curr.diceValue, 0);
-    setIsCooldown(rollCooldown);
+    setIsCooldown(gameState.rollCooldown);
 
     const rollAnimationDelay = GAME_SETTINGS.rollAnimationDelay;
 
     setTimeout(() => {
-      changePoints(res);
+      dispatch(changePoints(res));
 
-      changeStats({
-        ...stats,
-        diceRolls: stats.diceRolls + 1,
-        bestRoll: stats.bestRoll >= res ? stats.bestRoll : res,
-      });
+      dispatch(
+        changeStats({
+          ...gameState.stats,
+          diceRolls: gameState.stats.diceRolls + 1,
+          bestRoll: gameState.stats.bestRoll >= res ? gameState.stats.bestRoll : res,
+        })
+      );
     }, rollAnimationDelay);
   }
 
   function handleResetClick() {
-    changePoints(-points);
-    changeDiceAmount(-diceAmount + 1);
-    changeStats({ diceRolls: 0, bestRoll: 0 });
+    dispatch(changePoints(-gameState.points));
+    dispatch(changeDiceAmount(-gameState.diceAmount + 1));
+    dispatch(changeStats({ diceRolls: 0, bestRoll: 0 }));
 
     setDices([]);
   }
 
   function handleUpgradeClick() {
-    if (points >= upgradeCost) {
-      changeDiceAmount(1);
-      changePoints(-upgradeCost);
-      setUpgradeCost(getUpgradeCost);
+    if (gameState.points >= gameState.upgradeCost) {
+      dispatch(changeDiceAmount(1));
+      dispatch(changePoints(-gameState.upgradeCost));
+      dispatch(dispatch(changeUpgradeCost(getUpgradeCost())));
     }
   }
   return (
     <>
       <div className="game-screen">
         <div className="row">
-          <label>🎲 amount: {diceAmount}</label>
+          <label>🎲 amount: {gameState.diceAmount}</label>
           <button className="btn upgrade-btn" disabled={checkUpgradeBtnDisabled()} onClick={handleUpgradeClick}>
-            +1 🎲 (Cost: {upgradeCost})
+            +1 🎲 (Cost: {gameState.upgradeCost})
           </button>
         </div>
         <div className="row">
           <p className="points">
-            Points: {points}
+            Points: {gameState.points}
             <br></br>
             <span className="wincon-label"> ({GAME_SETTINGS.winCondition} points for victory)</span>
           </p>
@@ -104,7 +103,7 @@ export default function Game() {
           </button> */}
         </div>
       </div>
-      <ResultModal ref={winDialog} stats={stats} onReset={handleResetClick} />
+      <ResultModal ref={winDialog} stats={gameState.stats} onReset={handleResetClick} />
     </>
   );
 }
