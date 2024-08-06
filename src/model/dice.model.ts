@@ -1,4 +1,4 @@
-export interface Dice {
+export type Dice = {
   id: string;
   diceValue: number;
-}
+};

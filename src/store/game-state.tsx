@@ -4,7 +4,7 @@ import { GameState, GameStats, StateAction } from './model/game-state.model';
 
 let initialState: GameState = {
   points: 0,
-  diceAmount: 1,
+  diceAmount: 6,
   upgradeCost: 10,
   rollCooldown: 1500,
   stats: { diceRolls: 0, bestRoll: 0 },

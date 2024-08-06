@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { GAME_SETTINGS } from '../consts/game-settings.const';
-import { changeDiceAmount, changePoints, changeStats, changeUpgradeCost } from '../store/game-state';
+import { changeDiceAmount, changePoints, changeStats, changeUpgradeCost, reset } from '../store/game-state';
 import { GameState } from '../store/model/game-state.model';
+import { checkForCombo } from '../utils/combo-helper';
+import { calculatePoints } from '../utils/point-calculator';
 import DiceBoard from './DiceBoard';
 import ResultModal from './ResultModal';
 
@@ -37,12 +39,15 @@ export default function Game() {
   }, [isCooldown]);
 
   function handleRollClick() {
-    const diceArray = [];
+    const diceArray: Dice[] = [];
     for (let i = 0; i < gameState.diceAmount; i++) {
       diceArray.push({ id: uuidv4(), diceValue: getRollResult() });
     }
+    const combo = checkForCombo(diceArray);
+
     setDices(diceArray);
-    const res = diceArray.reduce((prev, curr) => prev + curr.diceValue, 0);
+    const dicesValue = diceArray.reduce((prev, curr) => prev + curr.diceValue, 0);
+    const res = calculatePoints(dicesValue, combo);
     setIsCooldown(gameState.rollCooldown);
 
     const rollAnimationDelay = GAME_SETTINGS.rollAnimationDelay;
@@ -61,11 +66,8 @@ export default function Game() {
   }
 
   function handleResetClick() {
-    dispatch(changePoints(-gameState.points));
-    dispatch(changeDiceAmount(-gameState.diceAmount + 1));
-    dispatch(changeStats({ diceRolls: 0, bestRoll: 0 }));
-
-    setDices([]);
+    dispatch(reset());
+    window.location.reload();
   }
 
   function handleUpgradeClick() {
@@ -93,14 +95,18 @@ export default function Game() {
         </div>
 
         <DiceBoard dices={dices} />
+        <div className="row">
+
+          
+        </div>
 
         <div className="row">
           <button className="btn roll-btn" onClick={handleRollClick} disabled={checkRollBtnDisabled()}>
             Roll
           </button>
-          {/* <button className="btn reset-btn" onClick={handleResetClick}>
+          <button className="btn reset-btn" onClick={handleResetClick}>
             Restart
-          </button> */}
+          </button>
         </div>
       </div>
       <ResultModal ref={winDialog} stats={gameState.stats} onReset={handleResetClick} />
