@@ -12,5 +12,5 @@ export default defineConfig({
       exclude: [],
     }),
   ],
-  base: '/dice-clicker/',
+  base: '/',
 });

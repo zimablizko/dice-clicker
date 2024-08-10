@@ -1,4 +1,4 @@
-import { Dice } from 'model/dice.model';
+import { Dice } from 'common/model/dice.model';
 import DiceElement from './DiceElement';
 
 type DiceBoardProps = {

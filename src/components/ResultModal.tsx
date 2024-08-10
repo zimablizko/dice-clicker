@@ -1,17 +1,15 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { reset } from '../store/game-state';
+import { GameState } from '../store/model/game-state.model';
 
-type ResultModalProps = {
-  stats: {
-    diceRolls: number;
-    bestRoll: number;
-  };
-  onReset: () => void;
-};
-
-const ResultModal = forwardRef(({ stats, onReset }: ResultModalProps, ref) => {
+const ResultModal = forwardRef((_, ref) => {
   const dialog = useRef<HTMLDialogElement>(null);
-
+  const gameState = useSelector(
+    (state: { gamestate: GameState }) => state.gamestate,
+  );
+  const dispatch = useDispatch();
   useImperativeHandle(ref, () => {
     return {
       open() {
@@ -20,18 +18,27 @@ const ResultModal = forwardRef(({ stats, onReset }: ResultModalProps, ref) => {
     };
   });
 
+  function handleResetClick() {
+    dispatch(reset());
+    window.location.reload();
+  }
+
   return createPortal(
-    <dialog ref={dialog} className="result-modal" onClose={() => onReset()}>
+    <dialog
+      ref={dialog}
+      className="result-modal"
+      onClose={() => handleResetClick()}
+    >
       <p>VICTORY!</p>
-      <p>Dice rolls: {stats.diceRolls}</p>
-      <p>Best roll: {stats.bestRoll}</p>
+      <p>Dice rolls: {gameState.stats.diceRolls}</p>
+      <p>Best roll: {gameState.stats.bestRoll}</p>
       <div>
-        <form onSubmit={onReset} method="dialog">
+        <form onSubmit={handleResetClick} method="dialog">
           <button className="btn reset-btn">Restart</button>
         </form>
       </div>
     </dialog>,
-    document.getElementById('modal')!
+    document.getElementById('modal')!,
   );
 });
 

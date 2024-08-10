@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { saveManager } from '../utils/save-manager';
+import { saveManager } from '../common/utils/save-manager';
 import { GameState, GameStats, StateAction } from './model/game-state.model';
 
 let initialState: GameState = {
   points: 0,
-  diceAmount: 6,
+  diceAmount: 1,
   upgradeCost: 10,
   rollCooldown: 1500,
   stats: { diceRolls: 0, bestRoll: 0 },
@@ -48,5 +48,11 @@ const gameStateSlice = createSlice({
 });
 
 export default gameStateSlice.reducer;
-export const { changePoints, changeDiceAmount, changeStats, changeRollCooldown, changeUpgradeCost, reset } =
-  gameStateSlice.actions;
+export const {
+  changePoints,
+  changeDiceAmount,
+  changeStats,
+  changeRollCooldown,
+  changeUpgradeCost,
+  reset,
+} = gameStateSlice.actions;
