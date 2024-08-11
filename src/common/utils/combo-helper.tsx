@@ -5,10 +5,7 @@ export const checkForCombo = (dices: Dice[]): Combo => {
   let result = Combo.None;
 
   const diceValues = dices.map((dice) => dice.diceValue);
-  const length = diceValues.length;
-  const uniqueValues = Array.from(new Set(diceValues));
   result = checkForSameValues(diceValues);
-  console.log(result);
   return result;
 };
 
@@ -17,7 +14,6 @@ const checkForSameValues = (diceValues: number[]): Combo => {
   let result = Combo.None;
 
   const uniqueValues = [...new Set(diceValues)].sort();
-  console.log(diceValues, uniqueValues);
   let maxLength = 0;
   let maxValue = 1;
 
@@ -40,7 +36,6 @@ const checkForSameValues = (diceValues: number[]): Combo => {
   if (maxLength < 2) {
     return result;
   }
-  console.log(maxLength, maxValue);
   switch (maxLength) {
     case 2:
       resultList.push(Combo.Pair);
@@ -59,7 +54,6 @@ const checkForSameValues = (diceValues: number[]): Combo => {
       break;
   }
 
-  console.log(resultList);
   result = resultList.sort().at(-1)!;
 
   return result;

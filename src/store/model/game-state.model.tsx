@@ -4,6 +4,7 @@ export type GameState = {
   rollCooldown: number;
   upgradeCost: number;
   stats: GameStats;
+  achievements: Record<number, boolean>;
 };
 
 export interface GameStats {

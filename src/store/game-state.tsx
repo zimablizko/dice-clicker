@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Achievement } from '../common/enums/achievement.enum';
 import { saveManager } from '../common/utils/save-manager';
 import { GameState, GameStats, StateAction } from './model/game-state.model';
 
@@ -8,6 +9,7 @@ let initialState: GameState = {
   upgradeCost: 10,
   rollCooldown: 1500,
   stats: { diceRolls: 0, bestRoll: 0 },
+  achievements: {},
 };
 
 const gameStateSlice = createSlice({
@@ -28,6 +30,7 @@ const gameStateSlice = createSlice({
     },
     changeStats: (state, action: StateAction<GameStats>) => {
       state.stats = action.payload;
+
       saveManager.save('dc_gameState', state);
     },
     changeRollCooldown: (state, action: StateAction<number>) => {
@@ -38,6 +41,10 @@ const gameStateSlice = createSlice({
     },
     changeUpgradeCost: (state, action: StateAction<number>) => {
       state.upgradeCost = action.payload;
+      saveManager.save('dc_gameState', state);
+    },
+    unlockAchievement: (state, action: StateAction<Achievement>) => {
+      state.achievements[action.payload] = true;
       saveManager.save('dc_gameState', state);
     },
     reset: (state) => {
@@ -54,5 +61,6 @@ export const {
   changeStats,
   changeRollCooldown,
   changeUpgradeCost,
+  unlockAchievement,
   reset,
 } = gameStateSlice.actions;

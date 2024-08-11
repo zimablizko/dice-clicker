@@ -7,7 +7,7 @@
 
   .wincon-label {
     color: gray;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .row {
@@ -18,8 +18,53 @@
     flex-direction: column;
   }
 
+  .combo {
+    min-height: 2rem;
+  }
+
+  .calculation {
+    min-height: 2rem;
+  }
+
   .points {
     text-align: center;
+  }
+
+  .achievements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    gap: 1rem;
+
+    .achievement {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 0.3rem;
+      box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+      background-color: white;
+      min-height: 2rem;
+
+      &.unlocked {
+        background-color: lightgreen;
+      }
+
+      &.locked {
+        background-color: lightgray;
+      }
+
+      .name {
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .description {
+        font-size: 0.8rem;
+        margin: 0;
+      }
+    }
   }
 
   .btn {

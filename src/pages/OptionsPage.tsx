@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
-import { reset } from "../store/game-state";
+import { useDispatch } from 'react-redux';
+import { reset } from '../store/game-state';
 
 export default function OptionsPage() {
   const dispatch = useDispatch();
- function handleResetClick() {
-   dispatch(reset());
-   window.location.reload();
- }
+  function handleResetClick() {
+    dispatch(reset());
+    window.location.reload();
+  }
 
   return (
     <>

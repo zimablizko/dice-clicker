@@ -14,7 +14,7 @@ export default function UpgradesPage() {
   const checkUpgradeBtnDisabled = () =>
     gameState.points < gameState.upgradeCost;
 
-  const getUpgradeCost = () => gameState.diceAmount * 10;
+  const getUpgradeCost = () => 10 ** (gameState.diceAmount + 1);
 
   function handleUpgradeClick() {
     if (gameState.points >= gameState.upgradeCost) {
