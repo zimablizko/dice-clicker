@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const';
+import { GameState } from '../store/model/game-state.model';
 
 export default function PointCounter() {
   const points = useSelector(

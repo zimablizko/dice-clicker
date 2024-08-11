@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  changeDiceAmount,
-  changePoints,
-  changeUpgradeCost,
-} from '../store/game-state';
+import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const';
+import { UpgradeProperties } from '../common/model/upgrade.model';
+import { changePoints, increaseUpgradeLevel } from '../store/game-state';
 import { GameState } from '../store/model/game-state.model';
 
 export default function UpgradesPage() {
@@ -11,29 +9,44 @@ export default function UpgradesPage() {
   const gameState = useSelector(
     (state: { gamestate: GameState }) => state.gamestate,
   );
-  const checkUpgradeBtnDisabled = () =>
-    gameState.points < gameState.upgradeCost;
+  const checkUpgradeBtnDisabled = (upgrade: UpgradeProperties) =>
+    gameState.points < getUpgradeCost(upgrade);
 
-  const getUpgradeCost = () => 10 ** (gameState.diceAmount + 1);
+  const getUpgradeCost = (upgrade: UpgradeProperties) =>
+    upgrade.baseCost *
+    upgrade.costMultiplier ** (gameState.upgradeLevels[upgrade.id] + 1);
 
-  function handleUpgradeClick() {
-    if (gameState.points >= gameState.upgradeCost) {
-      dispatch(changeDiceAmount(1));
-      dispatch(changePoints(-gameState.upgradeCost));
-      dispatch(dispatch(changeUpgradeCost(getUpgradeCost())));
+  const handleUpgradeClick = (upgrade: UpgradeProperties) => {
+    const upgradeCost = getUpgradeCost(upgrade);
+    if (gameState.points >= upgradeCost) {
+      // dispatch(changeD/iceAmount(1));
+
+      dispatch(changePoints(-upgradeCost));
+      dispatch(increaseUpgradeLevel(upgrade.id));
+      // dispatch(changeUpgradeCost(getUpgradeCost()));
     }
-  }
+  };
+
   return (
     <>
       <div className="row">
-        <label>🎲 amount: {gameState.diceAmount}</label>
-        <button
-          className="btn upgrade-btn"
-          disabled={checkUpgradeBtnDisabled()}
-          onClick={handleUpgradeClick}
-        >
-          +1 🎲 (Cost: {gameState.upgradeCost})
-        </button>
+        <div className="upgrades-container">
+          {UPGRADE_VALUES.map((upgrade) => (
+            <div className="upgrade" key={upgrade.id}>
+              <p className="name">
+                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
+              </p>
+
+              <button
+                className="btn upgrade-btn"
+                disabled={checkUpgradeBtnDisabled(upgrade)}
+                onClick={() => handleUpgradeClick(upgrade)}
+              >
+                Cost: {getUpgradeCost(upgrade)}
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

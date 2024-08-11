@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const';
+import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const';
+import { Upgrade } from '../common/enums/upgrade.enum';
 import { CalculationResult } from '../common/model/calculation.model';
 import { Dice } from '../common/model/dice.model';
 import { checkForCombo } from '../common/utils/combo-helper';
@@ -24,6 +26,15 @@ export default function MainPage() {
   const [res, setRes] = useState<CalculationResult | undefined>();
 
   const getRollResult = () => Math.floor(Math.random() * 6) + 1;
+  const getCooldown = () =>
+    Math.round(
+      GAME_SETTINGS.baseRollCooldown /
+        UPGRADE_VALUES[Upgrade.ReduceCooldown].value! **
+          gameState.upgradeLevels[Upgrade.ReduceCooldown],
+    );
+  const getUpgradePointsMultiplier = () =>
+    UPGRADE_VALUES[Upgrade.PointsMultiplier].value! *
+    gameState.upgradeLevels[Upgrade.PointsMultiplier];
 
   const checkRollBtnDisabled = () => isCooldown > 0;
 
@@ -32,7 +43,10 @@ export default function MainPage() {
 
   function handleRollClick() {
     const diceArray: Dice[] = [];
-    for (let i = 0; i < gameState.diceAmount; i++) {
+    const dicesAmount = gameState.upgradeLevels[Upgrade.DiceAmount];
+    const cooldown = getCooldown();
+    const pointsMultiplier = getUpgradePointsMultiplier();
+    for (let i = 0; i < dicesAmount; i++) {
       diceArray.push({ id: uuidv4(), diceValue: getRollResult() });
     }
     const combo = checkForCombo(diceArray);
@@ -42,9 +56,10 @@ export default function MainPage() {
       (prev, curr) => prev + curr.diceValue,
       0,
     );
-    const res = calculatePoints(dicesValue, combo);
 
-    setIsCooldown(gameState.rollCooldown);
+    const res = calculatePoints(dicesValue, combo, pointsMultiplier);
+
+    setIsCooldown(cooldown);
 
     const rollAnimationDelay = GAME_SETTINGS.rollAnimationDelay;
 
@@ -89,8 +104,16 @@ export default function MainPage() {
           <label>
             {res && res.baseValue !== 0 && (
               <>
-                {res.baseValue} x {res.comboProperties.multiplier} ={' '}
-                {res.result}
+                {res.baseValue === res.result && res.result}
+                {res.baseValue !== res.result && (
+                  <>
+                    {res.baseValue}
+                    {res.upgradeMultiplier > 1 && ` x ${res.upgradeMultiplier}`}
+                    {res.comboProperties.multiplier > 1 &&
+                      ` x ${res.comboProperties.multiplier}`}
+                    {` = ${res.result}`}
+                  </>
+                )}
               </>
             )}
           </label>

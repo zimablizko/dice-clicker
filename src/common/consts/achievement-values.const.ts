@@ -1,34 +1,6 @@
 import { Achievement, AchievementGroup } from '../enums/achievement.enum';
 import { AchievementProperties } from '../model/achievement.model';
 
-// export const ACHIEVEMENT_VALUES: Map<Achievement, AchievementProperties> =
-//   new Map([
-//     [
-//       Achievement.Roll1,
-//       {
-//         description: 'Roll 1',
-//         name: 'Roll 1',
-//         group: AchievementGroup.Rolls,
-//       },
-//     ],
-//     [
-//       Achievement.Roll10,
-//       {
-//         description: 'Roll 10',
-//         name: 'Roll 10',
-//         group: AchievementGroup.Rolls,
-//       },
-//     ],
-//     [
-//       Achievement.Roll100,
-//       {
-//         description: 'Roll 100',
-//         name: 'Roll 100',
-//         group: AchievementGroup.Rolls,
-//       },
-//     ],
-//   ]);
-
 export const ACHIEVEMENT_VALUES: Array<AchievementProperties> = [
   {
     id: Achievement.Roll1,

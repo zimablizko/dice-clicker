@@ -1,0 +1,26 @@
+.upgrades-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 1rem;
+
+  .upgrade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    gap: 1rem;
+
+    .name {
+      // font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .cost {
+      // font-size: 0.8rem;
+      margin: 0;
+    }
+  }
+}

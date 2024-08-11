@@ -5,7 +5,6 @@ import { AchievementGroup } from '../enums/achievement.enum';
 export const checkForAchievements = (gameState: GameState) => {
   const newAchievements = [];
   const currentAchievements = gameState.achievements;
-  console.log('CURRENT ACHIEVEMENTS', currentAchievements);
 
   //check for rolls achievements
   const rolls = gameState.stats.diceRolls;

@@ -12,14 +12,12 @@ export default function AchievementListener() {
 
   useEffect(() => {
     const newAchievements = checkForAchievements(gameState);
-    console.log('ACHS', newAchievements);
     if (newAchievements.length) {
       for (const ach of newAchievements) {
         dispatch(unlockAchievement(ach));
       }
     }
   }, [gameState.stats.diceRolls]);
-  console.log('AchievementListener');
 
   return <></>;
 }
