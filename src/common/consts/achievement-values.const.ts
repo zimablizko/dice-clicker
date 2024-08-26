@@ -1,5 +1,5 @@
-import { Achievement, AchievementGroup } from '../enums/achievement.enum';
-import { AchievementProperties } from '../model/achievement.model';
+import { Achievement, AchievementGroup } from '../enums/achievement.enum.js';
+import { AchievementProperties } from '../model/achievement.model.js';
 
 export const ACHIEVEMENT_VALUES: Array<AchievementProperties> = [
   {

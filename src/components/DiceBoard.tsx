@@ -1,5 +1,5 @@
-import { Dice } from 'common/model/dice.model';
-import DiceElement from './DiceElement';
+import { Dice } from 'common/model/dice.model.js';
+import DiceElement from './DiceElement.js';
 
 type DiceBoardProps = {
   dices: Dice[];

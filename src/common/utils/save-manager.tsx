@@ -3,8 +3,11 @@ import CryptoJS from 'crypto-js';
 const secretKey = import.meta.env.VITE_SECRET_KEY as string;
 
 export const saveManager = {
-  save: (key: string, data: any) => {
-    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
+  save: (key: string, data: unknown) => {
+    const encryptedData = CryptoJS.AES.encrypt(
+      JSON.stringify(data),
+      secretKey,
+    ).toString();
     localStorage.setItem(key, encryptedData);
   },
   load: (key: string) => {

@@ -1,8 +1,8 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { reset } from '../store/game-state';
-import { GameState } from '../store/model/game-state.model';
+import { reset } from '../store/game-state.js';
+import { GameState } from '../store/model/game-state.model.js';
 
 const ResultModal = forwardRef((_, ref) => {
   const dialog = useRef<HTMLDialogElement>(null);

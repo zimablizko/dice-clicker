@@ -1,4 +1,4 @@
-import { ComboProperties } from './combo.model';
+import { ComboProperties } from './combo.model.js';
 
 export type CalculationResult = {
   baseValue: number;

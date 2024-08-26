@@ -1,6 +1,6 @@
-import { COMBO_VALUES } from '../consts/combo-values.const';
-import { Combo } from '../enums/combo.enum';
-import { CalculationResult } from '../model/calculation.model';
+import { COMBO_VALUES } from '../consts/combo-values.const.js';
+import { Combo } from '../enums/combo.enum.js';
+import { CalculationResult } from '../model/calculation.model.js';
 
 export const calculatePoints = (
   baseValue: number,

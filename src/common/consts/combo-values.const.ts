@@ -1,5 +1,5 @@
-import { Combo } from '../enums/combo.enum';
-import { ComboProperties } from '../model/combo.model';
+import { Combo } from '../enums/combo.enum.js';
+import { ComboProperties } from '../model/combo.model.js';
 
 export const COMBO_VALUES: Map<Combo, ComboProperties> = new Map([
   [Combo.None, { multiplier: 1, name: '' }],

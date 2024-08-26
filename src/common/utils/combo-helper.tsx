@@ -1,5 +1,5 @@
-import { Combo } from '../enums/combo.enum';
-import { Dice } from '../model/dice.model';
+import { Combo } from '../enums/combo.enum.js';
+import { Dice } from '../model/dice.model.js';
 
 export const checkForCombo = (dices: Dice[]): Combo => {
   let result = Combo.None;
@@ -15,7 +15,7 @@ const checkForSameValues = (diceValues: number[]): Combo => {
 
   const uniqueValues = [...new Set(diceValues)].sort();
   let maxLength = 0;
-  let maxValue = 1;
+  // let maxValue = 1;
 
   for (const uniqueValue of uniqueValues) {
     const count = diceValues.filter((v) => v === uniqueValue).length;
@@ -28,7 +28,7 @@ const checkForSameValues = (diceValues: number[]): Combo => {
       }
       if (count >= maxLength) {
         maxLength = count;
-        maxValue = uniqueValue;
+        // maxValue = uniqueValue;
       }
     }
   }

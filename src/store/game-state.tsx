@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { INITIAL_STATE } from '../common/consts/initial-state.const';
-import { Achievement } from '../common/enums/achievement.enum';
-import { Upgrade } from '../common/enums/upgrade.enum';
-import { saveManager } from '../common/utils/save-manager';
-import { GameState, GameStats, StateAction } from './model/game-state.model';
+import { INITIAL_STATE } from '../common/consts/initial-state.const.js';
+import { Achievement } from '../common/enums/achievement.enum.js';
+import { Upgrade } from '../common/enums/upgrade.enum.js';
+import { saveManager } from '../common/utils/save-manager.js';
+import { GameState, GameStats, StateAction } from './model/game-state.model.js';
 
-let initialState = INITIAL_STATE;
+const initialState = INITIAL_STATE;
 
 const gameStateSlice = createSlice({
   name: 'gameState',

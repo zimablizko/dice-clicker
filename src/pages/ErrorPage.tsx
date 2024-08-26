@@ -1,11 +1,10 @@
-import { useRouteError } from 'react-router-dom';
-import MainNavigation from '../components/MainNavigation';
+import MainNavigation from '../components/MainNavigation.js';
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  // const error = useRouteError();
 
-  let title = 'An error occured';
-  let message = 'Sorry, an error occured. Please try again later.';
+  const title = 'An error occured';
+  const message = 'Sorry, an error occured. Please try again later.';
 
   // if (error.status === 500) {
   //   message = error.data.message;

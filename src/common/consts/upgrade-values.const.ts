@@ -1,5 +1,5 @@
-import { Upgrade } from '../enums/upgrade.enum';
-import { UpgradeProperties } from '../model/upgrade.model';
+import { Upgrade } from '../enums/upgrade.enum.js';
+import { UpgradeProperties } from '../model/upgrade.model.js';
 
 export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {

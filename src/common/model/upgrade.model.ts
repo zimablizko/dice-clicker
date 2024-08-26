@@ -1,4 +1,4 @@
-import { Upgrade } from '../enums/upgrade.enum';
+import { Upgrade } from '../enums/upgrade.enum.js';
 
 export type UpgradeProperties = {
   id: Upgrade;

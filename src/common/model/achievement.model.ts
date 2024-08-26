@@ -1,4 +1,4 @@
-import { Achievement, AchievementGroup } from '../enums/achievement.enum';
+import { Achievement, AchievementGroup } from '../enums/achievement.enum.js';
 
 export type AchievementProperties = {
   id: Achievement;

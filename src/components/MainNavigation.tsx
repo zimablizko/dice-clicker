@@ -7,7 +7,7 @@ function MainNavigation() {
         <ul className="list">
           <li>
             <NavLink
-              to="/"
+              to="/dice-clicker"
               className={({ isActive }) => (isActive ? 'active' : undefined)}
               end
             >
@@ -16,7 +16,7 @@ function MainNavigation() {
           </li>
           <li>
             <NavLink
-              to="/upgrades"
+              to="/dice-clicker/upgrades"
               className={({ isActive }) => (isActive ? 'active' : undefined)}
             >
               Upgrades
@@ -24,7 +24,7 @@ function MainNavigation() {
           </li>
           <li>
             <NavLink
-              to="/achievements"
+              to="/dice-clicker/achievements"
               className={({ isActive }) => (isActive ? 'active' : undefined)}
             >
               Achievements
@@ -32,7 +32,7 @@ function MainNavigation() {
           </li>
           <li>
             <NavLink
-              to="/options"
+              to="/dice-clicker/options"
               className={({ isActive }) => (isActive ? 'active' : undefined)}
             >
               Options

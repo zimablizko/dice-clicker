@@ -1,5 +1,5 @@
-import { Achievement } from '../../common/enums/achievement.enum';
-import { Upgrade } from '../../common/enums/upgrade.enum';
+import { Achievement } from '../../common/enums/achievement.enum.js';
+import { Upgrade } from '../../common/enums/upgrade.enum.js';
 
 export type GameState = {
   points: number;

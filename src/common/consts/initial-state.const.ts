@@ -1,6 +1,6 @@
-import { GameState } from '../../store/model/game-state.model';
-import { Achievement } from '../enums/achievement.enum';
-import { Upgrade } from '../enums/upgrade.enum';
+import { GameState } from '../../store/model/game-state.model.js';
+import { Achievement } from '../enums/achievement.enum.js';
+import { Upgrade } from '../enums/upgrade.enum.js';
 
 export const INITIAL_STATE: GameState = {
   points: 0,

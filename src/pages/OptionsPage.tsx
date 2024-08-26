@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { reset } from '../store/game-state';
+import { reset } from '../store/game-state.js';
 
 export default function OptionsPage() {
   const dispatch = useDispatch();

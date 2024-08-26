@@ -1,6 +1,6 @@
-import { GameState } from '../../store/model/game-state.model';
-import { ACHIEVEMENT_VALUES } from '../consts/achievement-values.const';
-import { AchievementGroup } from '../enums/achievement.enum';
+import { GameState } from '../../store/model/game-state.model.js';
+import { ACHIEVEMENT_VALUES } from '../consts/achievement-values.const.js';
+import { AchievementGroup } from '../enums/achievement.enum.js';
 
 export const checkForAchievements = (gameState: GameState) => {
   const newAchievements = [];

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const';
-import { UpgradeProperties } from '../common/model/upgrade.model';
-import { changePoints, increaseUpgradeLevel } from '../store/game-state';
-import { GameState } from '../store/model/game-state.model';
+import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const.js';
+import { UpgradeProperties } from '../common/model/upgrade.model.js';
+import { changePoints, increaseUpgradeLevel } from '../store/game-state.js';
+import { GameState } from '../store/model/game-state.model.js';
 
 export default function UpgradesPage() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function UpgradesPage() {
   const handleUpgradeClick = (upgrade: UpgradeProperties) => {
     const upgradeCost = getUpgradeCost(upgrade);
     if (gameState.points >= upgradeCost) {
-      // dispatch(changeD/iceAmount(1));
+      // dispatch(changeDiceAmount(1));
 
       dispatch(changePoints(-upgradeCost));
       dispatch(increaseUpgradeLevel(upgrade.id));

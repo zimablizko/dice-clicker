@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import AchievementsPage from './pages/AchievementsPage';
-import ErrorPage from './pages/ErrorPage';
-import MainPage from './pages/MainPage';
-import OptionsPage from './pages/OptionsPage';
-import RootLayout from './pages/RootLayout';
-import UpgradesPage from './pages/UpgradesPage';
+import AchievementsPage from './pages/AchievementsPage.js';
+import ErrorPage from './pages/ErrorPage.js';
+import MainPage from './pages/MainPage.js';
+import OptionsPage from './pages/OptionsPage.js';
+import RootLayout from './pages/RootLayout.js';
+import UpgradesPage from './pages/UpgradesPage.js';
 import './styles/App.scss';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/dice-clicker',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
