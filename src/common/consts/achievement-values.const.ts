@@ -30,4 +30,33 @@ export const ACHIEVEMENT_VALUES: Array<AchievementProperties> = [
     group: AchievementGroup.Rolls,
     numCondition: 1000,
   },
+
+  {
+    id: Achievement.Points100,
+    description: 'Get 100 points',
+    name: '100 points',
+    group: AchievementGroup.Points,
+    numCondition: 100,
+  },
+  {
+    id: Achievement.Points1000,
+    description: 'Get 1000 points',
+    name: '1000 points',
+    group: AchievementGroup.Points,
+    numCondition: 1000,
+  },
+  {
+    id: Achievement.Points10000,
+    description: 'Get 10000 points',
+    name: '10000 points',
+    group: AchievementGroup.Points,
+    numCondition: 10000,
+  },
+  {
+    id: Achievement.Points100000,
+    description: 'Get 100000 points',
+    name: '100000 points',
+    group: AchievementGroup.Points,
+    numCondition: 100000,
+  },
 ];

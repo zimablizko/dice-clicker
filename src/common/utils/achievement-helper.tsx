@@ -18,5 +18,17 @@ export const checkForAchievements = (gameState: GameState) => {
     }
   }
 
+  //check for points achievements
+  const points = gameState.points;
+  const pointsAchievements = ACHIEVEMENT_VALUES.filter(
+    (a) => a.group === AchievementGroup.Points,
+  );
+  for (const ach of pointsAchievements) {
+    if (currentAchievements[ach.id]) continue;
+    if (points >= Number(ach.numCondition)) {
+      newAchievements.push(ach.id);
+    }
+  }
+
   return newAchievements;
 };

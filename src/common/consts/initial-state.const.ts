@@ -7,6 +7,10 @@ const achievements = {
   [Achievement.Roll10]: false,
   [Achievement.Roll100]: false,
   [Achievement.Roll1000]: false,
+  [Achievement.Points100]: false,
+  [Achievement.Points1000]: false,
+  [Achievement.Points10000]: false,
+  [Achievement.Points100000]: false,
 };
 
 const upgradeLevels = {
@@ -20,7 +24,7 @@ export const INITIAL_STATE: GameState = {
   diceAmount: 1,
   upgradeCost: 10,
   rollCooldown: 1500,
-  stats: { diceRolls: 0, bestRoll: 0 },
+  stats: { diceRolls: 0, bestRoll: 0, maxPoints: 0 },
   achievements: achievements,
   upgradeLevels: upgradeLevels,
 };

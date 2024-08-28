@@ -74,6 +74,10 @@ export default function RollButton({
             gameState.stats.bestRoll >= res.result
               ? gameState.stats.bestRoll
               : res.result,
+          maxPoints:
+            gameState.stats.maxPoints >= gameState.points
+              ? gameState.stats.maxPoints
+              : gameState.points,
         }),
       );
     }, rollAnimationDelay);

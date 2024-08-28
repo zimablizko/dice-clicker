@@ -14,6 +14,7 @@ export type GameState = {
 export interface GameStats {
   diceRolls: number;
   bestRoll: number;
+  maxPoints: number;
 }
 
 export type StateAction<T> = {
