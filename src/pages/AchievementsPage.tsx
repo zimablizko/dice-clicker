@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { ACHIEVEMENT_VALUES } from '../common/consts/achievement-values.const';
-import { GameState } from '../store/model/game-state.model';
+import { ACHIEVEMENT_VALUES } from '../common/consts/achievement-values.const.js';
+import { GameState } from '../store/model/game-state.model.js';
 
 export default function AchievementsPage() {
   const currentAchievements = useSelector(
@@ -8,7 +8,7 @@ export default function AchievementsPage() {
   );
 
   return (
-    <>
+    <div className="row stretched">
       <div className="achievements-container">
         {ACHIEVEMENT_VALUES.map((ach) => {
           return (
@@ -26,6 +26,6 @@ export default function AchievementsPage() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

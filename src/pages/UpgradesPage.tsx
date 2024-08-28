@@ -19,11 +19,8 @@ export default function UpgradesPage() {
   const handleUpgradeClick = (upgrade: UpgradeProperties) => {
     const upgradeCost = getUpgradeCost(upgrade);
     if (gameState.points >= upgradeCost) {
-      // dispatch(changeDiceAmount(1));
-
       dispatch(changePoints(-upgradeCost));
       dispatch(increaseUpgradeLevel(upgrade.id));
-      // dispatch(changeUpgradeCost(getUpgradeCost()));
     }
   };
 
@@ -33,10 +30,11 @@ export default function UpgradesPage() {
         <div className="upgrades-container">
           {UPGRADE_VALUES.map((upgrade) => (
             <div className="upgrade" key={upgrade.id}>
+              <p className="name">{upgrade.name}</p>
               <p className="name">
-                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
+                (LVL {gameState.upgradeLevels[upgrade.id]})
               </p>
-
+              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
               <button
                 className="btn upgrade-btn"
                 disabled={checkUpgradeBtnDisabled(upgrade)}
@@ -44,67 +42,6 @@ export default function UpgradesPage() {
               >
                 Upgrade
               </button>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="row">
-        <div className="upgrades-container">
-          {UPGRADE_VALUES.map((upgrade) => (
-            <div className="upgrade" key={upgrade.id}>
-              <p className="name">
-                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
-              </p>
-
-              <button
-                className="btn upgrade-btn"
-                disabled={checkUpgradeBtnDisabled(upgrade)}
-                onClick={() => handleUpgradeClick(upgrade)}
-              >
-                Upgrade
-              </button>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="row">
-        <div className="upgrades-container">
-          {UPGRADE_VALUES.map((upgrade) => (
-            <div className="upgrade" key={upgrade.id}>
-              <p className="name">
-                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
-              </p>
-
-              <button
-                className="btn upgrade-btn"
-                disabled={checkUpgradeBtnDisabled(upgrade)}
-                onClick={() => handleUpgradeClick(upgrade)}
-              >
-                Upgrade
-              </button>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="row">
-        <div className="upgrades-container">
-          {UPGRADE_VALUES.map((upgrade) => (
-            <div className="upgrade" key={upgrade.id}>
-              <p className="name">
-                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
-              </p>
-
-              <button
-                className="btn upgrade-btn"
-                disabled={checkUpgradeBtnDisabled(upgrade)}
-                onClick={() => handleUpgradeClick(upgrade)}
-              >
-                Upgrade
-              </button>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
             </div>
           ))}
         </div>

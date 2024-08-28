@@ -11,7 +11,7 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   },
   {
     id: Upgrade.ReduceCooldown,
-    name: 'Reduce cooldown',
+    name: 'Cooldown reduction',
     baseCost: 5,
     costMultiplier: 15,
     value: 1.1,
