@@ -13,16 +13,27 @@
     a {
       text-decoration: none;
       color: var(--color-primary-400);
+
+      @media (max-width: 600px) {
+        font-size: 1rem;
+      }
     }
 
     a:hover,
     a.active {
       color: var(--color-primary-800);
     }
+  }
 
-    @media (max-width: 600px) {
-      flex-direction: column;
-      align-items: center;
-    }
+  @media (max-width: 600px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(12, 6, 6, 0.829);
+    box-shadow: 0 -2px 4px 2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
   }
 }

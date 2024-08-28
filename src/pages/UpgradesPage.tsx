@@ -42,8 +42,69 @@ export default function UpgradesPage() {
                 disabled={checkUpgradeBtnDisabled(upgrade)}
                 onClick={() => handleUpgradeClick(upgrade)}
               >
-                Cost: {getUpgradeCost(upgrade)}
+                Upgrade
               </button>
+              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="upgrades-container">
+          {UPGRADE_VALUES.map((upgrade) => (
+            <div className="upgrade" key={upgrade.id}>
+              <p className="name">
+                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
+              </p>
+
+              <button
+                className="btn upgrade-btn"
+                disabled={checkUpgradeBtnDisabled(upgrade)}
+                onClick={() => handleUpgradeClick(upgrade)}
+              >
+                Upgrade
+              </button>
+              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="upgrades-container">
+          {UPGRADE_VALUES.map((upgrade) => (
+            <div className="upgrade" key={upgrade.id}>
+              <p className="name">
+                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
+              </p>
+
+              <button
+                className="btn upgrade-btn"
+                disabled={checkUpgradeBtnDisabled(upgrade)}
+                onClick={() => handleUpgradeClick(upgrade)}
+              >
+                Upgrade
+              </button>
+              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="row">
+        <div className="upgrades-container">
+          {UPGRADE_VALUES.map((upgrade) => (
+            <div className="upgrade" key={upgrade.id}>
+              <p className="name">
+                {upgrade.name}: {gameState.upgradeLevels[upgrade.id]}
+              </p>
+
+              <button
+                className="btn upgrade-btn"
+                disabled={checkUpgradeBtnDisabled(upgrade)}
+                onClick={() => handleUpgradeClick(upgrade)}
+              >
+                Upgrade
+              </button>
+              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
             </div>
           ))}
         </div>

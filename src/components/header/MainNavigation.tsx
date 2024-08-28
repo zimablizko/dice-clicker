@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function MainNavigation() {
   return (
-    <header className="navigation">
+    <section className="navigation">
       <nav>
         <ul className="list">
           <li>
@@ -40,7 +40,7 @@ function MainNavigation() {
           </li>
         </ul>
       </nav>
-    </header>
+    </section>
   );
 }
 

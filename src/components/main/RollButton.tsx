@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
-import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const.js';
-import { Upgrade } from '../common/enums/upgrade.enum.js';
-import { CalculationResult } from '../common/model/calculation.model.js';
-import { Dice } from '../common/model/dice.model.js';
-import { checkForCombo } from '../common/utils/combo-helper.js';
-import { calculatePoints } from '../common/utils/point-calculator.js';
-import { changePoints, changeStats } from '../store/game-state.js';
-import { GameState } from '../store/model/game-state.model.js';
+import { GAME_SETTINGS } from '../../common/consts/game-settings.const.js';
+import { UPGRADE_VALUES } from '../../common/consts/upgrade-values.const.js';
+import { Upgrade } from '../../common/enums/upgrade.enum.js';
+import { CalculationResult } from '../../common/model/calculation.model.js';
+import { Dice } from '../../common/model/dice.model.js';
+import { checkForCombo } from '../../common/utils/combo-helper.js';
+import { calculatePoints } from '../../common/utils/point-calculator.js';
+import { changePoints, changeStats } from '../../store/game-state.js';
+import { GameState } from '../../store/model/game-state.model.js';
 
 type RollButtonProps = {
   onRollResult: (result: CalculationResult | undefined) => void;

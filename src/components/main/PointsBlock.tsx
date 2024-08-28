@@ -1,4 +1,4 @@
-import { CalculationResult } from '../common/model/calculation.model.js';
+import { CalculationResult } from '../../common/model/calculation.model.js';
 
 type PointsBlockProps = {
   result: CalculationResult | undefined;

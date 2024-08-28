@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkForAchievements } from '../common/utils/achievement-helper.js';
-import { unlockAchievement } from '../store/game-state.js';
-import { GameState } from '../store/model/game-state.model.js';
+import { checkForAchievements } from '../../common/utils/achievement-helper.js';
+import { unlockAchievement } from '../../store/game-state.js';
+import { GameState } from '../../store/model/game-state.model.js';
 
 export default function AchievementListener() {
   const dispatch = useDispatch();

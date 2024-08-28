@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
 import { CalculationResult } from '../common/model/calculation.model.js';
 import { Dice } from '../common/model/dice.model.js';
-import DiceBoard from '../components/DiceBoard.js';
-import PointsBlock from '../components/PointsBlock.js';
-import ResultModal from '../components/ResultModal.js';
-import RollButton from '../components/RollButton.js';
+import DiceBoard from '../components/main/DiceBoard.js';
+import PointsBlock from '../components/main/PointsBlock.js';
+import ResultModal from '../components/main/ResultModal.js';
+import RollButton from '../components/main/RollButton.js';
 import { GameState } from '../store/model/game-state.model.js';
 
 export default function MainPage() {

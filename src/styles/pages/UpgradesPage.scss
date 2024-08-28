@@ -1,13 +1,14 @@
 .upgrades-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+
+  grid-template-columns: repeat(auto-fill, minmax(1fr));
   gap: 1rem;
 
   .upgrade {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    //3-col template
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    flex-direction: column;
     border-radius: 0.3rem;
     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
     padding: 1rem;

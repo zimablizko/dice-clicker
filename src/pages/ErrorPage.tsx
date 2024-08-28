@@ -1,4 +1,4 @@
-import MainNavigation from '../components/MainNavigation.js';
+import MainNavigation from '../components/header/MainNavigation.js';
 
 export default function ErrorPage() {
   // const error = useRouteError();

@@ -17,12 +17,12 @@
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+  background: linear-gradient(to bottom, #003b00, #005e00, #003600);
 
   * {
     font-family: 'Playmegames', sans-serif;
@@ -30,18 +30,22 @@ body {
   }
 
   #root {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #003b00, #005e00, #003600);
 
     header {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      padding-bottom: 0;
+
+      section {
+        color: var(--color-primary-200);
+      }
 
       h1 {
         font-size: 54px;
@@ -57,67 +61,70 @@ body {
         -webkit-text-fill-color: transparent;
       }
     }
-  }
-}
 
-.game-screen {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 2rem;
+    main {
+      flex: 1;
+      overflow: auto;
+      padding: 2rem;
+      padding-bottom: 4rem;
 
-  .row {
-    color: var(--color-primary-200);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    flex-direction: column;
-  }
-
-  .btn {
-    margin-left: 0.5rem;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
-    border: none;
-    transition: transform 0.1s ease;
-    padding: 0.3rem 0.5rem;
-    border-radius: 0.3rem;
-
-    &:active {
-      transform: scale(0.92);
-    }
-
-    &.roll-btn {
-      background-color: hsl(0, 100%, 50%);
-      color: white;
-
-      min-width: 10rem;
-
-      &:hover {
-        background-color: hsl(0, 100%, 30%);
-      }
-
-      &:disabled {
-        background-color: lightgray;
-        cursor: not-allowed;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
 
-    &.reset-btn {
-      background-color: hsl(0, 100%, 50%);
-      color: white;
-
-      &:hover {
-        background-color: hsl(0, 100%, 30%);
-      }
+    .row {
+      color: var(--color-primary-200);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-direction: column;
     }
 
-    &.upgrade-btn {
-      background-color: white;
+    .btn {
+      margin-left: 0.5rem;
+      box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+      border: none;
+      transition: transform 0.1s ease;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0.3rem;
 
-      &:hover {
-        background-color: lightgray;
+      &:active {
+        transform: scale(0.92);
+      }
+
+      &.roll-btn {
+        background-color: hsl(0, 100%, 50%);
+        color: white;
+
+        min-width: 10rem;
+
+        &:hover {
+          background-color: hsl(0, 100%, 30%);
+        }
+
+        &:disabled {
+          background-color: lightgray;
+          cursor: not-allowed;
+        }
+      }
+
+      &.reset-btn {
+        background-color: hsl(0, 100%, 50%);
+        color: white;
+
+        &:hover {
+          background-color: hsl(0, 100%, 30%);
+        }
+      }
+
+      &.upgrade-btn {
+        background-color: white;
+
+        &:hover {
+          background-color: lightgray;
+        }
       }
     }
   }
