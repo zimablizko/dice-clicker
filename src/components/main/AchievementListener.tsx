@@ -22,7 +22,7 @@ export default function AchievementListener() {
         );
       }
     }
-  }, [gameState.stats.diceRolls, gameState.stats.maxPoints]);
+  }, [gameState.stats.diceRolls, gameState.stats.maxChips]);
 
   return <></>;
 }

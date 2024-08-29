@@ -27,6 +27,7 @@ body {
   * {
     font-family: 'Playmegames', sans-serif;
     font-size: 1.6rem;
+    user-select: none;
   }
 
   #root {
@@ -94,6 +95,7 @@ body {
       transition: transform 0.1s ease;
       padding: 0.3rem 0.5rem;
       border-radius: 0.3rem;
+      user-select: none;
 
       &:active {
         transform: scale(0.92);
@@ -107,6 +109,20 @@ body {
 
         &:hover {
           background-color: hsl(0, 100%, 30%);
+        }
+
+        &:disabled {
+          background-color: lightgray;
+          cursor: not-allowed;
+        }
+      }
+
+      &.payout-btn {
+        background-color: hsl(120, 100%, 50%);
+        color: white;
+
+        &:hover {
+          background-color: hsl(120, 100%, 30%);
         }
 
         &:disabled {
@@ -129,6 +145,10 @@ body {
 
         &:hover {
           background-color: lightgray;
+        }
+
+        &.acquired {
+          background-color: lightgreen;
         }
       }
     }

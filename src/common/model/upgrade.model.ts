@@ -7,4 +7,5 @@ export type UpgradeProperties = {
   costMultiplier: number;
   value?: number;
   isPercentage?: boolean;
+  levels: number;
 };

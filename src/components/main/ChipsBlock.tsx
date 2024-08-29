@@ -1,10 +1,10 @@
 import { CalculationResult } from '../../common/model/calculation.model.js';
 
-type PointsBlockProps = {
+type ChipsBlockProps = {
   result: CalculationResult | undefined;
 };
 
-export default function PointsBlock({ result: res }: PointsBlockProps) {
+export default function ChipsBlock({ result: res }: ChipsBlockProps) {
   return (
     <div className="row">
       <div className="combo">

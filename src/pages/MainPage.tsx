@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
 import { CalculationResult } from '../common/model/calculation.model.js';
 import { Dice } from '../common/model/dice.model.js';
+import ChipsBlock from '../components/main/ChipsBlock.js';
 import DiceBoard from '../components/main/DiceBoard.js';
-import PointsBlock from '../components/main/PointsBlock.js';
 import ResultModal from '../components/main/ResultModal.js';
 import RollButton from '../components/main/RollButton.js';
 import { GameState } from '../store/model/game-state.model.js';
@@ -19,8 +19,7 @@ export default function MainPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const winDialog = useRef<any>(null);
 
-  const checkWinCondition = () =>
-    gameState.points >= GAME_SETTINGS.winCondition;
+  const checkWinCondition = () => gameState.chips >= GAME_SETTINGS.winCondition;
 
   if (checkWinCondition()) {
     winDialog.current!.open();
@@ -28,7 +27,7 @@ export default function MainPage() {
 
   return (
     <>
-      <PointsBlock result={res} />
+      <ChipsBlock result={res} />
       <DiceBoard dices={dices} />
       <RollButton onRollResult={setRes} onDicesChange={setDices} />
       <ResultModal ref={winDialog} />

@@ -6,9 +6,9 @@ import { UPGRADE_VALUES } from '../../common/consts/upgrade-values.const.js';
 import { Upgrade } from '../../common/enums/upgrade.enum.js';
 import { CalculationResult } from '../../common/model/calculation.model.js';
 import { Dice } from '../../common/model/dice.model.js';
+import { calculateChips } from '../../common/utils/chip-calculator.js';
 import { checkForCombo } from '../../common/utils/combo-helper.js';
-import { calculatePoints } from '../../common/utils/point-calculator.js';
-import { changePoints, changeStats } from '../../store/game-state.js';
+import { changeChips, changeStats } from '../../store/game-state.js';
 import { GameState } from '../../store/model/game-state.model.js';
 
 type RollButtonProps = {
@@ -35,9 +35,14 @@ export default function RollButton({
         UPGRADE_VALUES[Upgrade.ReduceCooldown].value! **
           gameState.upgradeLevels[Upgrade.ReduceCooldown],
     );
-  const getUpgradePointsMultiplier = () =>
-    UPGRADE_VALUES[Upgrade.PointsMultiplier].value! *
-    gameState.upgradeLevels[Upgrade.PointsMultiplier];
+  const getUpgradeChipsMultiplier = () =>
+    1 +
+    UPGRADE_VALUES[Upgrade.SmallChipsMultiplier].value! *
+      gameState.upgradeLevels[Upgrade.SmallChipsMultiplier] +
+    UPGRADE_VALUES[Upgrade.BigChipsMultiplier].value! *
+      gameState.upgradeLevels[Upgrade.BigChipsMultiplier] +
+    UPGRADE_VALUES[Upgrade.MediumChipsMultiplier].value! *
+      gameState.upgradeLevels[Upgrade.MediumChipsMultiplier];
 
   const checkRollBtnDisabled = () => isCooldown > 0;
   function handleRollClick() {
@@ -46,7 +51,7 @@ export default function RollButton({
     const diceArray: Dice[] = [];
     const dicesAmount = gameState.upgradeLevels[Upgrade.DiceAmount];
     const cooldown = getCooldown();
-    const pointsMultiplier = getUpgradePointsMultiplier();
+    const chipsMultiplier = getUpgradeChipsMultiplier();
     for (let i = 0; i < dicesAmount; i++) {
       diceArray.push({ id: uuidv4(), diceValue: getRollResult() });
     }
@@ -57,14 +62,14 @@ export default function RollButton({
       0,
     );
 
-    const res = calculatePoints(dicesValue, combo, pointsMultiplier);
+    const res = calculateChips(dicesValue, combo, chipsMultiplier);
 
     setIsCooldown(cooldown);
 
     const rollAnimationDelay = GAME_SETTINGS.rollAnimationDelay;
 
     setTimeout(() => {
-      dispatch(changePoints(res.result));
+      dispatch(changeChips(res.result));
       onRollResult(res);
       dispatch(
         changeStats({
@@ -74,10 +79,10 @@ export default function RollButton({
             gameState.stats.bestRoll >= res.result
               ? gameState.stats.bestRoll
               : res.result,
-          maxPoints:
-            gameState.stats.maxPoints >= gameState.points
-              ? gameState.stats.maxPoints
-              : gameState.points,
+          maxChips:
+            gameState.stats.maxChips >= gameState.chips
+              ? gameState.stats.maxChips
+              : gameState.chips,
         }),
       );
     }, rollAnimationDelay);

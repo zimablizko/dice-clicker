@@ -11,10 +11,10 @@ const gameStateSlice = createSlice({
   name: 'gameState',
   initialState: saveManager.load('dc_gameState') ?? (initialState as GameState),
   reducers: {
-    changePoints: (state, action: StateAction<number>) => {
-      const newPoints = state.points + action.payload;
-      if (newPoints < 0) return;
-      state.points = newPoints;
+    changeChips: (state, action: StateAction<number>) => {
+      const newChips = state.chips + action.payload;
+      if (newChips < 0) return;
+      state.chips = newChips;
       saveManager.save('dc_gameState', state);
     },
     changeDiceAmount: (state, action: StateAction<number>) => {
@@ -55,7 +55,7 @@ const gameStateSlice = createSlice({
 
 export default gameStateSlice.reducer;
 export const {
-  changePoints,
+  changeChips,
   changeDiceAmount,
   changeStats,
   changeRollCooldown,

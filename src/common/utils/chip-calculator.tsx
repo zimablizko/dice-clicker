@@ -2,7 +2,7 @@ import { COMBO_VALUES } from '../consts/combo-values.const.js';
 import { Combo } from '../enums/combo.enum.js';
 import { CalculationResult } from '../model/calculation.model.js';
 
-export const calculatePoints = (
+export const calculateChips = (
   baseValue: number,
   combo: Combo,
   upgradeMultiplier: number,

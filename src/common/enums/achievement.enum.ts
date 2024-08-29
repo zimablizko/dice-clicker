@@ -4,13 +4,13 @@ export enum Achievement {
   Roll100,
   Roll1000,
 
-  Points100,
-  Points1000,
-  Points10000,
-  Points100000,
+  Chips100,
+  Chips1000,
+  Chips10000,
+  Chips100000,
 }
 
 export enum AchievementGroup {
   Rolls,
-  Points,
+  Chips,
 }

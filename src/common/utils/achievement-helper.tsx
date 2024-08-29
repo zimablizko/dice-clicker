@@ -18,14 +18,14 @@ export const checkForAchievements = (gameState: GameState) => {
     }
   }
 
-  //check for points achievements
-  const points = gameState.points;
-  const pointsAchievements = ACHIEVEMENT_VALUES.filter(
-    (a) => a.group === AchievementGroup.Points,
+  //check for chips achievements
+  const chips = gameState.chips;
+  const chipsAchievements = ACHIEVEMENT_VALUES.filter(
+    (a) => a.group === AchievementGroup.Chips,
   );
-  for (const ach of pointsAchievements) {
+  for (const ach of chipsAchievements) {
     if (currentAchievements[ach.id]) continue;
-    if (points >= Number(ach.numCondition)) {
+    if (chips >= Number(ach.numCondition)) {
       newAchievements.push(ach.id);
     }
   }

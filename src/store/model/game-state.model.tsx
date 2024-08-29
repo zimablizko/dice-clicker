@@ -2,7 +2,7 @@ import { Achievement } from '../../common/enums/achievement.enum.js';
 import { Upgrade } from '../../common/enums/upgrade.enum.js';
 
 export type GameState = {
-  points: number;
+  chips: number;
   diceAmount: number;
   rollCooldown: number;
   upgradeCost: number;
@@ -14,7 +14,7 @@ export type GameState = {
 export interface GameStats {
   diceRolls: number;
   bestRoll: number;
-  maxPoints: number;
+  maxChips: number;
 }
 
 export type StateAction<T> = {

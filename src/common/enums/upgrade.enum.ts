@@ -1,5 +1,8 @@
 export enum Upgrade {
   DiceAmount,
   ReduceCooldown,
-  PointsMultiplier,
+
+  SmallChipsMultiplier,
+  MediumChipsMultiplier,
+  BigChipsMultiplier,
 }
