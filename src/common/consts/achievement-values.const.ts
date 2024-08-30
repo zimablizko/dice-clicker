@@ -59,4 +59,33 @@ export const ACHIEVEMENT_VALUES: Array<AchievementProperties> = [
     group: AchievementGroup.Chips,
     numCondition: 100000,
   },
+
+  {
+    id: Achievement.Payout1,
+    description: 'Get your first payout',
+    name: 'First Payout',
+    group: AchievementGroup.Payouts,
+    numCondition: 1,
+  },
+  {
+    id: Achievement.Payout10,
+    description: 'Get 10 payouts',
+    name: '10 Payouts',
+    group: AchievementGroup.Payouts,
+    numCondition: 10,
+  },
+  {
+    id: Achievement.Payout100,
+    description: 'Get 100 payouts',
+    name: '100 Payouts',
+    group: AchievementGroup.Payouts,
+    numCondition: 100,
+  },
+  {
+    id: Achievement.Payout1000,
+    description: 'Get 1000 payouts',
+    name: '1000 Payouts',
+    group: AchievementGroup.Payouts,
+    numCondition: 1000,
+  },
 ];

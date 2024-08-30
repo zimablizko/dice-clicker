@@ -22,7 +22,11 @@ export default function AchievementListener() {
         );
       }
     }
-  }, [gameState.stats.diceRolls, gameState.stats.maxChips]);
+  }, [
+    gameState.stats.diceRolls,
+    gameState.stats.maxChips,
+    gameState.stats.payouts,
+  ]);
 
   return <></>;
 }

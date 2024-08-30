@@ -11,6 +11,10 @@ const achievements = {
   [Achievement.Chips1000]: false,
   [Achievement.Chips10000]: false,
   [Achievement.Chips100000]: false,
+  [Achievement.Payout1]: false,
+  [Achievement.Payout10]: false,
+  [Achievement.Payout100]: false,
+  [Achievement.Payout1000]: false,
 };
 
 const upgradeLevels = {
@@ -26,7 +30,9 @@ export const INITIAL_STATE: GameState = {
   diceAmount: 1,
   upgradeCost: 10,
   rollCooldown: 1500,
-  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0 },
+  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 0 },
   achievements: achievements,
   upgradeLevels: upgradeLevels,
+
+  coins: 0,
 };

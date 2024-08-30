@@ -4,6 +4,7 @@ import ErrorPage from './pages/ErrorPage.js';
 import MainPage from './pages/MainPage.js';
 import OptionsPage from './pages/OptionsPage.js';
 import RootLayout from './pages/RootLayout.js';
+import StorePage from './pages/StorePage.js';
 import UpgradesPage from './pages/UpgradesPage.js';
 import './styles/App.scss';
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'options',
         element: <OptionsPage />,
+      },
+      {
+        path: 'store',
+        element: <StorePage />,
       },
     ],
   },

@@ -30,5 +30,17 @@ export const checkForAchievements = (gameState: GameState) => {
     }
   }
 
+  //check for payout achievements
+  const payouts = gameState.stats.payouts;
+  const payoutAchievements = ACHIEVEMENT_VALUES.filter(
+    (a) => a.group === AchievementGroup.Payouts,
+  );
+  for (const ach of payoutAchievements) {
+    if (currentAchievements[ach.id]) continue;
+    if (payouts >= Number(ach.numCondition)) {
+      newAchievements.push(ach.id);
+    }
+  }
+
   return newAchievements;
 };

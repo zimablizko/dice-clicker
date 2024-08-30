@@ -31,6 +31,7 @@ export default function RollButton({
   const getRollResult = () => Math.floor(Math.random() * 6) + 1;
   const getCooldown = () =>
     Math.round(
+      //TODO: remove baseRollCooldown from GAME_SETTINGS?
       GAME_SETTINGS.baseRollCooldown /
         UPGRADE_VALUES[Upgrade.ReduceCooldown].value! **
           gameState.upgradeLevels[Upgrade.ReduceCooldown],

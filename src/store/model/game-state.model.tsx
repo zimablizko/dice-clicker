@@ -9,12 +9,15 @@ export type GameState = {
   stats: GameStats;
   achievements: Record<Achievement, boolean>;
   upgradeLevels: Record<Upgrade, number>;
+
+  coins: number;
 };
 
 export interface GameStats {
   diceRolls: number;
   bestRoll: number;
   maxChips: number;
+  payouts: number;
 }
 
 export type StateAction<T> = {

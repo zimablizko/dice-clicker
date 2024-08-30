@@ -50,6 +50,20 @@ const gameStateSlice = createSlice({
       state = initialState;
       saveManager.save('dc_gameState', state);
     },
+    payout: (state) => {
+      //reset state except coins and achievements
+      const coins = state.coins;
+      const achievements = { ...state.achievements };
+      const stats = { ...state.stats };
+      console.log('payout', coins, achievements);
+      state = initialState;
+      state.coins = coins + 1;
+      state.achievements = achievements;
+      state.stats = stats;
+      state.stats.payouts++;
+      console.log('payout', state);
+      saveManager.save('dc_gameState', state);
+    },
   },
 });
 
@@ -63,4 +77,5 @@ export const {
   unlockAchievement,
   increaseUpgradeLevel,
   reset,
+  payout,
 } = gameStateSlice.actions;
