@@ -18,7 +18,7 @@ const achievements = {
 };
 
 const upgradeLevels = {
-  [Upgrade.DiceAmount]: 1,
+  [Upgrade.DiceAmount]: 0,
   [Upgrade.ReduceCooldown]: 0,
   [Upgrade.SmallChipsMultiplier]: 0,
   [Upgrade.MediumChipsMultiplier]: 0,

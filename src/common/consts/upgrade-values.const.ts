@@ -4,8 +4,8 @@ import { UpgradeProperties } from '../model/upgrade.model.js';
 export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {
     id: Upgrade.DiceAmount,
-    name: 'Dices',
-    baseCost: 0.1,
+    name: 'Extra Dices',
+    baseCost: 10,
     costMultiplier: 10,
     value: 1,
     levels: 5,
@@ -13,7 +13,7 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {
     id: Upgrade.ReduceCooldown,
     name: 'Cooldown reduction',
-    baseCost: 15,
+    baseCost: 150,
     costMultiplier: 5,
     value: 1.1,
     isPercentage: true,
@@ -23,8 +23,8 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {
     id: Upgrade.SmallChipsMultiplier,
     name: 'Small chips multiplier',
-    baseCost: 10,
-    costMultiplier: 15,
+    baseCost: 1500,
+    costMultiplier: 0,
     value: 0.2,
     isPercentage: true,
     levels: 1,
@@ -32,8 +32,8 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {
     id: Upgrade.MediumChipsMultiplier,
     name: 'Medium chips multiplier',
-    baseCost: 100,
-    costMultiplier: 20,
+    baseCost: 20000,
+    costMultiplier: 0,
     value: 0.5,
     isPercentage: true,
     levels: 1,
@@ -41,8 +41,8 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   {
     id: Upgrade.BigChipsMultiplier,
     name: 'Big chips multiplier',
-    baseCost: 1000,
-    costMultiplier: 25,
+    baseCost: 250000,
+    costMultiplier: 0,
     value: 0.8,
     isPercentage: true,
     levels: 1,

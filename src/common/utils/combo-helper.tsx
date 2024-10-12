@@ -3,7 +3,6 @@ import { Dice } from '../model/dice.model.js';
 
 export const checkForCombo = (dices: Dice[]): Combo => {
   let result = Combo.None;
-
   const diceValues = dices.map((dice) => dice.diceValue);
   result = checkForSameValues(diceValues);
   return result;
@@ -15,7 +14,6 @@ const checkForSameValues = (diceValues: number[]): Combo => {
 
   const uniqueValues = [...new Set(diceValues)].sort();
   let maxLength = 0;
-  // let maxValue = 1;
 
   for (const uniqueValue of uniqueValues) {
     const count = diceValues.filter((v) => v === uniqueValue).length;
@@ -28,7 +26,6 @@ const checkForSameValues = (diceValues: number[]): Combo => {
       }
       if (count >= maxLength) {
         maxLength = count;
-        // maxValue = uniqueValue;
       }
     }
   }

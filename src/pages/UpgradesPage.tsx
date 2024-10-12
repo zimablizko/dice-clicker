@@ -18,7 +18,7 @@ export default function UpgradesPage() {
 
   const getUpgradeCost = (upgrade: UpgradeProperties) =>
     upgrade.baseCost *
-    upgrade.costMultiplier ** (gameState.upgradeLevels[upgrade.id] + 1);
+    upgrade.costMultiplier ** gameState.upgradeLevels[upgrade.id];
 
   const handleUpgradeClick = (upgrade: UpgradeProperties) => {
     const upgradeCost = getUpgradeCost(upgrade);

@@ -19,7 +19,7 @@ export const checkForAchievements = (gameState: GameState) => {
   }
 
   //check for chips achievements
-  const chips = gameState.chips;
+  const chips = gameState.resources.chips;
   const chipsAchievements = ACHIEVEMENT_VALUES.filter(
     (a) => a.group === AchievementGroup.Chips,
   );
