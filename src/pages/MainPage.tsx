@@ -19,7 +19,8 @@ export default function MainPage() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const winDialog = useRef<any>(null);
 
-  const checkWinCondition = () => gameState.chips >= GAME_SETTINGS.winCondition;
+  const checkWinCondition = () =>
+    gameState.resources.chips >= GAME_SETTINGS.winCondition;
 
   if (checkWinCondition()) {
     winDialog.current!.open();

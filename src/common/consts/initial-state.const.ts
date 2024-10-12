@@ -26,13 +26,8 @@ const upgradeLevels = {
 };
 
 export const INITIAL_STATE: GameState = {
-  chips: 0,
-  diceAmount: 1,
-  upgradeCost: 10,
-  rollCooldown: 1500,
+  resources: { chips: 0, coins: 0 },
   stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 0 },
   achievements: achievements,
   upgradeLevels: upgradeLevels,
-
-  coins: 0,
 };

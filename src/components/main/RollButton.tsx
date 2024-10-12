@@ -81,9 +81,9 @@ export default function RollButton({
               ? gameState.stats.bestRoll
               : res.result,
           maxChips:
-            gameState.stats.maxChips >= gameState.chips
+            gameState.stats.maxChips >= gameState.resources.chips
               ? gameState.stats.maxChips
-              : gameState.chips,
+              : gameState.resources.chips,
         }),
       );
     }, rollAnimationDelay);

@@ -10,7 +10,7 @@ export default function StorePage() {
   return (
     <>
       <div className="row">
-        <p>Coins: {gameState.coins}</p>
+        <p>Coins: {gameState.resources.coins}</p>
       </div>
     </>
   );

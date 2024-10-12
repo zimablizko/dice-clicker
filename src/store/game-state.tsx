@@ -12,30 +12,14 @@ const gameStateSlice = createSlice({
   initialState: saveManager.load('dc_gameState') ?? (initialState as GameState),
   reducers: {
     changeChips: (state, action: StateAction<number>) => {
-      const newChips = state.chips + action.payload;
+      const newChips = state.resources.chips + action.payload;
       if (newChips < 0) return;
-      state.chips = newChips;
-      saveManager.save('dc_gameState', state);
-    },
-    changeDiceAmount: (state, action: StateAction<number>) => {
-      const newDiceAmount = state.diceAmount + action.payload;
-      if (newDiceAmount < 1) return;
-      state.diceAmount = newDiceAmount;
+      state.resources.chips = newChips;
       saveManager.save('dc_gameState', state);
     },
     changeStats: (state, action: StateAction<GameStats>) => {
       state.stats = action.payload;
 
-      saveManager.save('dc_gameState', state);
-    },
-    changeRollCooldown: (state, action: StateAction<number>) => {
-      const newCooldown = state.rollCooldown + action.payload;
-      if (newCooldown < 0) return;
-      state.rollCooldown = newCooldown;
-      saveManager.save('dc_gameState', state);
-    },
-    changeUpgradeCost: (state, action: StateAction<number>) => {
-      state.upgradeCost = action.payload;
       saveManager.save('dc_gameState', state);
     },
     unlockAchievement: (state, action: StateAction<Achievement>) => {
@@ -57,10 +41,15 @@ const gameStateSlice = createSlice({
       const stats = { ...state.stats };
       console.log('payout', coins, achievements);
       state = initialState;
-      state.coins = coins + 1;
-      state.achievements = achievements;
-      state.stats = stats;
-      state.stats.payouts++;
+      state = {
+        ...initialState,
+        resources: {
+          ...initialState.resources,
+          coins: state.resources.coins + 1,
+        },
+        achievements: achievements,
+        stats: { ...initialState.stats, payouts: stats.payouts + 1 },
+      };
       console.log('payout', state);
       saveManager.save('dc_gameState', state);
     },
@@ -70,10 +59,7 @@ const gameStateSlice = createSlice({
 export default gameStateSlice.reducer;
 export const {
   changeChips,
-  changeDiceAmount,
   changeStats,
-  changeRollCooldown,
-  changeUpgradeCost,
   unlockAchievement,
   increaseUpgradeLevel,
   reset,

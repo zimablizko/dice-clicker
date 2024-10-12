@@ -10,7 +10,7 @@ export default function UpgradesPage() {
     (state: { gamestate: GameState }) => state.gamestate,
   );
   const checkUpgradeBtnDisabled = (upgrade: UpgradeProperties) =>
-    gameState.chips < getUpgradeCost(upgrade) ||
+    gameState.resources.chips < getUpgradeCost(upgrade) ||
     gameState.upgradeLevels[upgrade.id] >= upgrade.levels;
   const checkUpgradeAcquired = (upgrade: UpgradeProperties) => {
     return gameState.upgradeLevels[upgrade.id] >= upgrade.levels;
@@ -22,7 +22,7 @@ export default function UpgradesPage() {
 
   const handleUpgradeClick = (upgrade: UpgradeProperties) => {
     const upgradeCost = getUpgradeCost(upgrade);
-    if (gameState.chips >= upgradeCost) {
+    if (gameState.resources.chips >= upgradeCost) {
       dispatch(changeChips(-upgradeCost));
       dispatch(increaseUpgradeLevel(upgrade.id));
     }

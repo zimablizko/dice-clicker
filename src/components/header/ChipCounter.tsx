@@ -5,7 +5,7 @@ import { GameState } from '../../store/model/game-state.model.js';
 
 export default function ChipCounter() {
   const chips = useSelector(
-    (state: { gamestate: GameState }) => state.gamestate.chips,
+    (state: { gamestate: GameState }) => state.gamestate.resources.chips,
   );
   const chips100Achievement = useSelector(
     (state: { gamestate: GameState }) =>
