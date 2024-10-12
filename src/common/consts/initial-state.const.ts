@@ -1,5 +1,6 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { Achievement } from '../enums/achievement.enum.js';
+import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 
 const achievements = {
@@ -25,9 +26,17 @@ const upgradeLevels = {
   [Upgrade.BigChipsMultiplier]: 0,
 };
 
+const shopUpgradeLevels = {
+  [ShopUpgrade.PairMultiplier]: 0,
+  [ShopUpgrade.TwoPairsMultiplier]: 0,
+  [ShopUpgrade.ThreeOfAKindMultiplier]: 0,
+  [ShopUpgrade.AutoRoll]: 0,
+};
+
 export const INITIAL_STATE: GameState = {
-  resources: { chips: 0, coins: 0 },
-  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 0 },
-  achievements: achievements,
-  upgradeLevels: upgradeLevels,
+  resources: { chips: 99995, coins: 99999 },
+  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 1 },
+  achievements,
+  upgradeLevels,
+  shopUpgradeLevels,
 };

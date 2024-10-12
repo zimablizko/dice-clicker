@@ -118,11 +118,12 @@ body {
       }
 
       &.payout-btn {
-        background-color: hsl(120, 100%, 50%);
+        margin-top: 10px;
+        background-color: var(--color-primary-800);
         color: white;
 
         &:hover {
-          background-color: hsl(120, 100%, 30%);
+          background-color: var(--color-primary-900);
         }
 
         &:disabled {

@@ -1,11 +1,11 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { GAME_SETTINGS } from '../consts/game-settings.const.js';
-import { UPGRADE_VALUES } from '../consts/upgrade-values.const.js';
+import { UPGRADE_MAP } from '../consts/upgrade-values.const.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 
 export const getCooldown = (gameState: GameState): number =>
   Math.round(
     GAME_SETTINGS.baseRollCooldown /
-      UPGRADE_VALUES[Upgrade.ReduceCooldown].value! **
+      UPGRADE_MAP.get(Upgrade.ReduceCooldown)!.value! **
         gameState.upgradeLevels[Upgrade.ReduceCooldown],
   );

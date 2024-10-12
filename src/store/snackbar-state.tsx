@@ -15,7 +15,6 @@ const snackbarSlice = createSlice({
   initialState,
   reducers: {
     showSnackbar: (state, action: PayloadAction<string>) => {
-      console.log('showSnackbar');
       state.isOpen = true;
       state.message = action.payload;
     },

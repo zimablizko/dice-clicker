@@ -1,11 +1,13 @@
+import { ResourceType } from '../enums/resource-type.enum.js';
+import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 
 export type UpgradeProperties = {
-  id: Upgrade;
+  id: Upgrade | ShopUpgrade;
   name: string;
   baseCost: number;
   costMultiplier: number;
   value?: number;
-  isPercentage?: boolean;
   levels: number;
+  resourceType: ResourceType;
 };

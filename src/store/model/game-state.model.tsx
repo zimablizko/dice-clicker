@@ -1,4 +1,5 @@
 import { Achievement } from '../../common/enums/achievement.enum.js';
+import { ShopUpgrade } from '../../common/enums/shop-upgrade.enum.js';
 import { Upgrade } from '../../common/enums/upgrade.enum.js';
 
 export type GameState = {
@@ -6,6 +7,7 @@ export type GameState = {
   stats: GameStats;
   achievements: Record<Achievement, boolean>;
   upgradeLevels: Record<Upgrade, number>;
+  shopUpgradeLevels: Record<ShopUpgrade, number>;
 };
 
 export interface GameStats {

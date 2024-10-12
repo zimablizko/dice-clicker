@@ -20,12 +20,12 @@ const ResultModal = forwardRef((_, ref) => {
     window.location.reload();
   }
 
+  function handleCancel() {
+    dialog.current!.close();
+  }
+
   return createPortal(
-    <dialog
-      ref={dialog}
-      className="result-modal"
-      onClose={() => handleResetClick()}
-    >
+    <dialog ref={dialog} className="result-modal">
       <p>Payout goal reached!</p>
       {/* <p>Dice rolls: {gameState.stats.diceRolls}</p>
       <p>Best roll: {gameState.stats.bestRoll}</p> */}
@@ -33,6 +33,9 @@ const ResultModal = forwardRef((_, ref) => {
       <div>
         <form onSubmit={handleResetClick} method="dialog">
           <button className="btn reset-btn">Payout</button>
+          <button className="btn reset-btn" onClick={handleCancel} type="reset">
+            Cancel
+          </button>
         </form>
       </div>
     </dialog>,

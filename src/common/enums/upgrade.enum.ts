@@ -1,8 +1,10 @@
 export enum Upgrade {
-  DiceAmount,
-  ReduceCooldown,
+  //multi-level upgrades
+  DiceAmount = 10,
+  ReduceCooldown = 11,
 
-  SmallChipsMultiplier,
-  MediumChipsMultiplier,
-  BigChipsMultiplier,
+  //one time upgrades
+  SmallChipsMultiplier = 12,
+  MediumChipsMultiplier = 13,
+  BigChipsMultiplier = 14,
 }
