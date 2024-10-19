@@ -35,7 +35,10 @@ export default function UpgradesPage() {
       <div className="row">
         <div className="upgrades-container">
           {UPGRADE_VALUES.filter(
-            (u) => u.levels > 1 && u.resourceType === ResourceType.Chips,
+            (u) =>
+              u.levels > 1 &&
+              u.resourceType === ResourceType.Chips &&
+              u.conditions?.(gameState) !== false,
           ).map((upgrade) => (
             <div className="upgrade" key={upgrade.id}>
               <p className="name">{upgrade.name}</p>
@@ -54,7 +57,10 @@ export default function UpgradesPage() {
           ))}
           <div className="upgrade">
             {UPGRADE_VALUES.filter(
-              (u) => u.levels === 1 && u.resourceType === ResourceType.Chips,
+              (u) =>
+                u.levels === 1 &&
+                u.resourceType === ResourceType.Chips &&
+                u.conditions?.(gameState) !== false,
             ).map((upgrade) => (
               <button
                 key={upgrade.id}

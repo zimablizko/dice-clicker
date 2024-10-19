@@ -30,6 +30,8 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     value: 1.1,
     levels: 1000,
     resourceType: ResourceType.Chips,
+    conditions: (gameState) =>
+      gameState.shopUpgradeLevels[ShopUpgrade.AutoRoll] > 0,
   },
 
   {
@@ -49,6 +51,8 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     value: 0.5,
     levels: 1,
     resourceType: ResourceType.Chips,
+    conditions: (gameState) =>
+      gameState.upgradeLevels[Upgrade.SmallChipsMultiplier] >= 1,
   },
   {
     id: Upgrade.BigChipsMultiplier,
@@ -58,6 +62,8 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     value: 0.8,
     levels: 1,
     resourceType: ResourceType.Chips,
+    conditions: (gameState) =>
+      gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] >= 1,
   },
 ];
 

@@ -15,7 +15,8 @@ export const calculateChips = (
   const comboProperties = COMBO_VALUES.get(combo)!;
   const comboMultiplier = getComboMultiplier(gameState, combo);
   const upgradeMultiplier = getFlatMultiplier(gameState);
-  const finalMultiplier = comboMultiplier * upgradeMultiplier;
+  const finalMultiplier =
+    Math.round(comboMultiplier * upgradeMultiplier * 100) / 100;
   result = Math.round(result * finalMultiplier);
   return {
     baseValue,

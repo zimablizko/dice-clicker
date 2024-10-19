@@ -93,7 +93,8 @@ export default function RollButton({
     if (isCooldown > 0) {
       const cooldown = getCooldown(gameState);
       const interval = setInterval(() => {
-        setIsCooldown(isCooldown - 50);
+        const newValue = isCooldown - 50 < 0 ? 0 : isCooldown - 50;
+        setIsCooldown(newValue);
         setCooldownPercent(
           Math.ceil(((cooldown - isCooldown) / cooldown) * 100),
         );
@@ -118,12 +119,12 @@ export default function RollButton({
 
       return () => clearInterval(interval);
     } else {
-      if (autoRollEnabled) {
+      if (autoRollEnabled && !isCooldown) {
         handleRollClick();
         setIsAutoRollCooldown(cooldown);
       }
     }
-  }, [autoRollUnlocked, autoRollEnabled, isAutoRollCooldown]);
+  }, [autoRollUnlocked, autoRollEnabled, isCooldown, isAutoRollCooldown]);
 
   return (
     <>
