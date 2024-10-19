@@ -22,8 +22,6 @@ export default function ChipsBlock({ result: res }: ChipsBlockProps) {
                   <>
                     {res.baseValue}
                     {res.upgradeMultiplier > 1 && ` x ${res.upgradeMultiplier}`}
-                    {res.comboProperties.multiplier > 1 &&
-                      ` x ${res.comboProperties.multiplier}`}
                     {` = ${res.result}`}
                   </>
                 )}

@@ -47,6 +47,16 @@ export const getComboMultiplier = (
         UPGRADE_MAP.get(ShopUpgrade.PairMultiplier)!.value! *
         gameState.shopUpgradeLevels[ShopUpgrade.PairMultiplier];
       break;
+    case Combo.TwoPairs:
+      comboMultiplier +=
+        UPGRADE_MAP.get(ShopUpgrade.TwoPairsMultiplier)!.value! *
+        gameState.shopUpgradeLevels[ShopUpgrade.TwoPairsMultiplier];
+      break;
+    case Combo.ThreeOfAKind:
+      comboMultiplier +=
+        UPGRADE_MAP.get(ShopUpgrade.ThreeOfAKindMultiplier)!.value! *
+        gameState.shopUpgradeLevels[ShopUpgrade.ThreeOfAKindMultiplier];
+      break;
   }
   return comboMultiplier;
 };

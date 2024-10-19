@@ -17,7 +17,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     id: Upgrade.ReduceCooldown,
     name: 'Cooldown reduction',
     baseCost: 150,
-    costMultiplier: 5,
+    costMultiplier: 3,
     value: 1.1,
     levels: 1000,
     resourceType: ResourceType.Chips,
@@ -37,7 +37,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.SmallChipsMultiplier,
     name: 'Small chips multiplier',
-    baseCost: 1500,
+    baseCost: 500,
     costMultiplier: 0,
     value: 0.2,
     levels: 1,
@@ -46,7 +46,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.MediumChipsMultiplier,
     name: 'Medium chips multiplier',
-    baseCost: 20000,
+    baseCost: 2000,
     costMultiplier: 0,
     value: 0.5,
     levels: 1,
@@ -57,7 +57,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.BigChipsMultiplier,
     name: 'Big chips multiplier',
-    baseCost: 250000,
+    baseCost: 10000,
     costMultiplier: 0,
     value: 0.8,
     levels: 1,
