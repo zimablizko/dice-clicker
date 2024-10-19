@@ -117,6 +117,24 @@ body {
         }
       }
 
+      &.auto-roll-btn {
+        background-color: hsl(0, 97%, 25%);
+        color: white;
+        margin-top: 1em;
+
+        &.disabled {
+          background-color: lightgray;
+        }
+
+        &:hover {
+          background-color: hsl(0, 97%, 13%);
+        }
+
+        &.active {
+          background-color: hsl(0, 98%, 17%);
+        }
+      }
+
       &.payout-btn {
         margin-top: 10px;
         background-color: var(--color-primary-800);

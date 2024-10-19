@@ -22,6 +22,15 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     levels: 1000,
     resourceType: ResourceType.Chips,
   },
+  {
+    id: Upgrade.ReduceAutoRollCooldown,
+    name: 'Auto-roll Cooldown reduction',
+    baseCost: 1500,
+    costMultiplier: 5,
+    value: 1.1,
+    levels: 1000,
+    resourceType: ResourceType.Chips,
+  },
 
   {
     id: Upgrade.SmallChipsMultiplier,

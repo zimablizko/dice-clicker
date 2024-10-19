@@ -9,3 +9,10 @@ export const getCooldown = (gameState: GameState): number =>
       UPGRADE_MAP.get(Upgrade.ReduceCooldown)!.value! **
         gameState.upgradeLevels[Upgrade.ReduceCooldown],
   );
+
+export const getAutoRollCooldown = (gameState: GameState): number =>
+  Math.round(
+    GAME_SETTINGS.baseAutoRollCooldown /
+      UPGRADE_MAP.get(Upgrade.ReduceAutoRollCooldown)!.value! **
+        gameState.upgradeLevels[Upgrade.ReduceAutoRollCooldown],
+  );
