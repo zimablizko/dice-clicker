@@ -3,6 +3,7 @@ import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const.js';
 import { ResourceType } from '../common/enums/resource-type.enum.js';
 import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
 import { UpgradeProperties } from '../common/model/upgrade.model.js';
+import { formatNumber } from '../common/utils/formatter.js';
 import { changeCoins, increaseShopUpgradeLevel } from '../store/game-state.js';
 import { GameState } from '../store/model/game-state.model.js';
 
@@ -43,14 +44,19 @@ export default function StorePage() {
       <div className="row">
         <div className="upgrades-container">
           {UPGRADE_VALUES.filter(
-            (u) => u.levels > 1 && u.resourceType === ResourceType.Coins,
+            (u) =>
+              u.levels > 1 &&
+              u.resourceType === ResourceType.Coins &&
+              u.conditions?.(gameState) !== false,
           ).map((upgrade) => (
             <div className="upgrade" key={upgrade.id}>
               <p className="name">{upgrade.name}</p>
               <p className="name">
                 (LVL {gameState.shopUpgradeLevels[upgrade.id as ShopUpgrade]})
               </p>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
+              <p className="name">
+                Cost: {formatNumber(getUpgradeCost(upgrade))}
+              </p>
               <button
                 className="btn upgrade-btn"
                 disabled={checkUpgradeBtnDisabled(upgrade)}
@@ -62,7 +68,10 @@ export default function StorePage() {
           ))}
           <div className="upgrade">
             {UPGRADE_VALUES.filter(
-              (u) => u.levels === 1 && u.resourceType === ResourceType.Coins,
+              (u) =>
+                u.levels === 1 &&
+                u.resourceType === ResourceType.Coins &&
+                u.conditions?.(gameState) !== false,
             ).map((upgrade) => (
               <button
                 key={upgrade.id}
@@ -78,7 +87,7 @@ export default function StorePage() {
                 <br />
                 {checkUpgradeAcquired(upgrade) && '(Acquired)'}
                 {!checkUpgradeAcquired(upgrade) &&
-                  `Cost: ${getUpgradeCost(upgrade)}`}
+                  `Cost: ${formatNumber(getUpgradeCost(upgrade))}`}
               </button>
             ))}
           </div>

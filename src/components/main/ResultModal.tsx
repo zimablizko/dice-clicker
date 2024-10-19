@@ -1,9 +1,14 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
+import { formatNumber } from '../../common/utils/formatter.js';
 import { payout } from '../../store/game-state.js';
 
-const ResultModal = forwardRef((_, ref) => {
+type ResultModalProps = {
+  coinReward: number;
+};
+
+const ResultModal = forwardRef(({ coinReward }: ResultModalProps, ref) => {
   const dialog = useRef<HTMLDialogElement>(null);
 
   const dispatch = useDispatch();
@@ -16,7 +21,7 @@ const ResultModal = forwardRef((_, ref) => {
   });
 
   function handleResetClick() {
-    dispatch(payout());
+    dispatch(payout(coinReward));
     window.location.reload();
   }
 
@@ -29,7 +34,10 @@ const ResultModal = forwardRef((_, ref) => {
       <p>Payout goal reached!</p>
       {/* <p>Dice rolls: {gameState.stats.diceRolls}</p>
       <p>Best roll: {gameState.stats.bestRoll}</p> */}
-      <p>You will receive 1 coin, but lose your chips and upgrades.</p>
+      <p>
+        You will receive {formatNumber(coinReward)}{' '}
+        {coinReward === 1 ? 'coin' : 'coins'}, but lose your chips and upgrades.
+      </p>
       <div>
         <form onSubmit={handleResetClick} method="dialog">
           <button className="btn reset-btn">Payout</button>

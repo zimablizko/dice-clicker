@@ -12,46 +12,50 @@ const gameStateSlice = createSlice({
   name: 'gameState',
   initialState: saveManager.load('dc_gameState') ?? (initialState as GameState),
   reducers: {
-    changeChips: (state, action: StateAction<number>) => {
+    changeChips: (state: GameState, action: StateAction<number>) => {
       const newChips = state.resources.chips + action.payload;
       if (newChips < 0) return;
       state.resources.chips = newChips;
       saveManager.save('dc_gameState', state);
     },
-    changeCoins: (state, action: StateAction<number>) => {
+    changeCoins: (state: GameState, action: StateAction<number>) => {
       const newCoins = state.resources.coins + action.payload;
       if (newCoins < 0) return;
       state.resources.coins = newCoins;
       saveManager.save('dc_gameState', state);
     },
-    changeStats: (state, action: StateAction<GameStats>) => {
+    changeStats: (state: GameState, action: StateAction<GameStats>) => {
       state.stats = action.payload;
 
       saveManager.save('dc_gameState', state);
     },
-    unlockAchievement: (state, action: StateAction<Achievement>) => {
+    unlockAchievement: (state: GameState, action: StateAction<Achievement>) => {
       state.achievements[action.payload] = true;
       saveManager.save('dc_gameState', state);
     },
-    increaseUpgradeLevel: (state, action: StateAction<Upgrade>) => {
+    increaseUpgradeLevel: (state: GameState, action: StateAction<Upgrade>) => {
       state.upgradeLevels[action.payload]++;
       saveManager.save('dc_gameState', state);
     },
-    increaseShopUpgradeLevel: (state, action: StateAction<ShopUpgrade>) => {
+    increaseShopUpgradeLevel: (
+      state: GameState,
+      action: StateAction<ShopUpgrade>,
+    ) => {
       state.shopUpgradeLevels[action.payload]++;
       saveManager.save('dc_gameState', state);
     },
-    reset: (state) => {
+    reset: (state: GameState) => {
       state = initialState;
       saveManager.save('dc_gameState', state);
     },
-    payout: (state) => {
+    payout: (state: GameState, action: StateAction<number>) => {
       //reset state except coins and achievements
-      const coins = state.coins;
       const achievements = { ...state.achievements };
       const shopUpgradeLevels = { ...state.shopUpgradeLevels };
       const stats = { ...state.stats };
-      console.log('payout', coins, achievements);
+      const coinReward = action.payload;
+      const coins = state.resources.coins + coinReward;
+      console.log('payout', coins, coinReward, achievements);
       state = initialState;
       state = {
         ...initialState,
@@ -59,7 +63,7 @@ const gameStateSlice = createSlice({
         achievements,
         resources: {
           ...initialState.resources,
-          coins: state.resources.coins + 1,
+          coins: coins,
         },
         stats: { ...initialState.stats, payouts: stats.payouts + 1 },
       };

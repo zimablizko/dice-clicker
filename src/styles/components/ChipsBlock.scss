@@ -1,7 +1,32 @@
 .combo {
-  height: 40px;
-  label {
+  min-height: 2rem;
+  .combo-name {
     font-size: 2.5rem;
     color: var(--color-primary-900);
+    animation: pop-in 1s ease-in-out 1;
+  }
+}
+
+.calculation {
+  min-height: 2rem;
+
+  .result {
+    animation: pop-in 0.5s ease-in-out 1;
+    font-size: 2rem;
+  }
+
+  @keyframes pop-in {
+    0% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    5% {
+      transform: scale(1.5);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }

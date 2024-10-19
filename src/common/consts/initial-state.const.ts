@@ -32,11 +32,12 @@ const shopUpgradeLevels = {
   [ShopUpgrade.TwoPairsMultiplier]: 0,
   [ShopUpgrade.ThreeOfAKindMultiplier]: 0,
   [ShopUpgrade.AutoRoll]: 0,
+  [ShopUpgrade.CoinGainMultiplier]: 0,
 };
 
 export const INITIAL_STATE: GameState = {
-  resources: { chips: 99995, coins: 99999 },
-  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 1 },
+  resources: { chips: 0, coins: 0 },
+  stats: { diceRolls: 0, bestRoll: 0, maxChips: 0, payouts: 0 },
   achievements,
   upgradeLevels,
   shopUpgradeLevels,

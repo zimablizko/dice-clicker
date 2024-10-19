@@ -85,6 +85,9 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     value: 0.6,
     levels: 5,
     resourceType: ResourceType.Coins,
+    conditions: (gameState) => {
+      return gameState.stats.payouts >= 3;
+    },
   },
   {
     id: ShopUpgrade.ThreeOfAKindMultiplier,
@@ -94,6 +97,9 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     value: 0.9,
     levels: 5,
     resourceType: ResourceType.Coins,
+    conditions: (gameState) => {
+      return gameState.stats.payouts >= 5;
+    },
   },
   {
     id: ShopUpgrade.AutoRoll,
@@ -102,6 +108,15 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     costMultiplier: 0,
     value: 0,
     levels: 1,
+    resourceType: ResourceType.Coins,
+  },
+  {
+    id: ShopUpgrade.CoinGainMultiplier,
+    name: 'Coin gain multiplier',
+    baseCost: 10,
+    costMultiplier: 10,
+    value: 2,
+    levels: 5,
     resourceType: ResourceType.Coins,
   },
 ];

@@ -3,6 +3,7 @@ import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const.js';
 import { ResourceType } from '../common/enums/resource-type.enum.js';
 import { Upgrade } from '../common/enums/upgrade.enum.js';
 import { UpgradeProperties } from '../common/model/upgrade.model.js';
+import { formatNumber } from '../common/utils/formatter.js';
 import { changeChips, increaseUpgradeLevel } from '../store/game-state.js';
 import { GameState } from '../store/model/game-state.model.js';
 
@@ -45,7 +46,9 @@ export default function UpgradesPage() {
               <p className="name">
                 (LVL {gameState.upgradeLevels[upgrade.id as Upgrade]})
               </p>
-              <p className="name">Cost: {getUpgradeCost(upgrade)}</p>
+              <p className="name">
+                Cost: {formatNumber(getUpgradeCost(upgrade))}
+              </p>
               <button
                 className="btn upgrade-btn"
                 disabled={checkUpgradeBtnDisabled(upgrade)}
@@ -76,7 +79,7 @@ export default function UpgradesPage() {
                 <br />
                 {checkUpgradeAcquired(upgrade) && '(Acquired)'}
                 {!checkUpgradeAcquired(upgrade) &&
-                  `Cost: ${getUpgradeCost(upgrade)}`}
+                  `Cost: ${formatNumber(getUpgradeCost(upgrade))}`}
               </button>
             ))}
           </div>

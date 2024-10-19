@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { GAME_SETTINGS } from '../../common/consts/game-settings.const.js';
 import { Achievement } from '../../common/enums/achievement.enum.js';
+import { getCoinReward } from '../../common/utils/coin-helper.js';
+import { formatNumber } from '../../common/utils/formatter.js';
 import { GameState } from '../../store/model/game-state.model.js';
 import ResultModal from '../main/ResultModal.js';
 
@@ -34,11 +36,11 @@ export default function ChipCounter() {
     <>
       <section>
         <p className="chips">
-          Chips: {chips}
+          Chips: {formatNumber(chips)}
           <br />
           <span className="wincon-label">
             {' '}
-            ({GAME_SETTINGS.winCondition} chips for payout)
+            ({formatNumber(GAME_SETTINGS.winCondition)} chips for payout)
           </span>
           {chips100Achievement && (
             <span>
@@ -62,7 +64,7 @@ export default function ChipCounter() {
           )}
         </p>
       </section>
-      <ResultModal ref={winDialog} />
+      <ResultModal ref={winDialog} coinReward={getCoinReward(gameState)} />
     </>
   );
 }
