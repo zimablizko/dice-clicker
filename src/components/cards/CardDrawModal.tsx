@@ -1,11 +1,13 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { CARD_VALUES } from '../../common/consts/card-values.const.js';
 import { CardRarity } from '../../common/enums/card-rarity.enum.js';
 import { Card } from '../../common/model/card.model.js';
+import { applyInstantEffect } from '../../common/utils/card-helper.js';
 import { addCard, increaseCardDrawPrice } from '../../store/game-state.js';
+import { GameState } from '../../store/model/game-state.model.js';
 import CardDisplay from './CardDisplay.js';
 
 
@@ -63,6 +65,9 @@ const CardDrawModal = forwardRef((_, ref) => {
   const dialog = useRef<HTMLDialogElement>(null);
   const dispatch = useDispatch();
   const [cards, setCards] = useState<Card[]>([]);
+  const gameState = useSelector(
+    (state: { gamestate: GameState }) => state.gamestate,
+  );
 
   useImperativeHandle(ref, () => {
     return {
@@ -79,6 +84,7 @@ const CardDrawModal = forwardRef((_, ref) => {
       const selectedCard = cards[index];
       dispatch(addCard(selectedCard));
       dispatch(increaseCardDrawPrice());
+      applyInstantEffect(gameState,dispatch, selectedCard);
       dialog.current!.close();
   };
 
