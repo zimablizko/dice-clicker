@@ -3,6 +3,7 @@ import { INITIAL_STATE } from '../common/consts/initial-state.const.js';
 import { Achievement } from '../common/enums/achievement.enum.js';
 import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
 import { Upgrade } from '../common/enums/upgrade.enum.js';
+import { Card } from '../common/model/card.model.js';
 import { saveManager } from '../common/utils/save-manager.js';
 import { GameState, GameStats, StateAction } from './model/game-state.model.js';
 
@@ -49,13 +50,13 @@ const gameStateSlice = createSlice({
       saveManager.save('dc_gameState', state);
     },
     payout: (state: GameState, action: StateAction<number>) => {
-      //reset state except coins and achievements
+      //reset state except coins, achievements, and shop upgrades
       const achievements = { ...state.achievements };
       const shopUpgradeLevels = { ...state.shopUpgradeLevels };
       const stats = { ...state.stats };
       const coinReward = action.payload;
       const coins = state.resources.coins + coinReward;
-      console.log('payout', coins, coinReward, achievements);
+      
       state = initialState;
       state = {
         ...initialState,
@@ -66,10 +67,20 @@ const gameStateSlice = createSlice({
           coins: coins,
         },
         stats: { ...initialState.stats, payouts: stats.payouts + 1 },
+        cards: [], // Reset cards on payout
+        cardDrawPrice: 10, // Reset card draw price on payout
       };
-      console.log('payout', state);
+      
       saveManager.save('dc_gameState', state);
     },
+    addCard: (state: GameState, action: StateAction<Card>) => {
+      state.cards.push(action.payload);
+      saveManager.save('dc_gameState', state);
+    },
+    increaseCardDrawPrice: (state: GameState) => {
+      state.cardDrawPrice = Math.round(state.cardDrawPrice * 1.15);  // 15% increase per draw
+      saveManager.save('dc_gameState', state);
+    }
   },
 });
 
@@ -83,4 +94,6 @@ export const {
   increaseShopUpgradeLevel,
   reset,
   payout,
+  addCard,
+  increaseCardDrawPrice
 } = gameStateSlice.actions;

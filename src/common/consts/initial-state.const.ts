@@ -41,4 +41,6 @@ export const INITIAL_STATE: GameState = {
   achievements,
   upgradeLevels,
   shopUpgradeLevels,
+  cards: [],
+  cardDrawPrice: 10,
 };

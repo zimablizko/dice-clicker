@@ -1,0 +1,90 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
+  width: 160px;
+  height: 200px;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-rarity {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-effect {
+    flex: 1;
+    font-size: 0.9rem;
+  }
+
+  &.common {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  &.uncommon {
+    background-color: #c8e6c9;
+    color: #1b5e20;
+  }
+
+  &.rare {
+    background-color: #bbdefb;
+    color: #0d47a1;
+  }
+
+  &.epic {
+    background-color: #d1c4e9;
+    color: #4527a0;
+  }
+
+  &.legendary {
+    background-color: #ffecb3;
+    color: #ff6f00;
+    border: 2px solid #ffc107;
+  }
+
+  &.selected {
+    border: 3px solid #ff4081;
+  }
+}
+
+.card-draw-modal {
+  background-color: #00000096;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  color: white;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
