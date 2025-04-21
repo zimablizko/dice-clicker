@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Upgrade } from '../common/enums/upgrade.enum.js';
 import { CalculationResult } from '../common/model/calculation.model.js';
 import { Dice } from '../common/model/dice.model.js';
 import { formatNumber } from '../common/utils/formatter.js';
+import CardCollection from '../components/cards/CardCollection.js';
 import CardDrawModal from '../components/cards/CardDrawModal.js';
 import ChipsBlock from '../components/main/ChipsBlock.js';
 import DiceBoard from '../components/main/DiceBoard.js';
@@ -15,6 +17,11 @@ export default function MainPage() {
   const gameState = useSelector(
     (state: { gamestate: GameState }) => state.gamestate,
   );
+
+  const cardsUnlocked = useSelector(
+    (state: { gamestate: GameState }) => state.gamestate.upgradeLevels[Upgrade.CardDraw] > 0,
+  );
+
   const [res, setRes] = useState<CalculationResult | undefined>();
   const [dices, setDices] = useState<Dice[]>([]);
   const cardDrawModalRef = useRef<{ open: () => void }>(null);
@@ -32,7 +39,11 @@ export default function MainPage() {
       <DiceBoard dices={dices} />
       <RollButton onRollResult={setRes} onDicesChange={setDices} />
       
-      <div className="row">
+      
+      
+      {cardsUnlocked && (
+        <>
+        <div className="row">
         <button 
           className="btn card-draw-btn" 
           onClick={handleDrawCardClick}
@@ -41,29 +52,15 @@ export default function MainPage() {
           Draw Card ({formatNumber(gameState.cardDrawPrice)} chips)
         </button>
       </div>
-      
-      {gameState.cards.length > 0 && (
-        <div className="row">
-          <h3>Your Cards ({gameState.cards.length})</h3>
-          <div className="cards-collection">
-            {gameState.cards.slice(0, 3).map((card) => (
-              <div key={card.id} className={`card-small ${card.rarity}`}>
-                <div className="card-name">{card.name}</div>
-                <div className="card-effect">{card.effect.description}</div>
-              </div>
-            ))}
-            {gameState.cards.length > 3 && (
-              <div className="card-small more-cards">
-                +{gameState.cards.length - 3} more cards
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      
-      <CardDrawModal 
+        <CardCollection cards={gameState.cards} />
+        <CardDrawModal 
         ref={cardDrawModalRef} 
       />
+        </>
+      )}
+      
+      
+      
     </>
   );
 }

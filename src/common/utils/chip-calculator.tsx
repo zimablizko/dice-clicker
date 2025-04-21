@@ -1,10 +1,12 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { COMBO_VALUES } from '../consts/combo-values.const.js';
 import { UPGRADE_MAP } from '../consts/upgrade-values.const.js';
+import { CardEffectType } from '../enums/card-effect.enum.js';
 import { Combo } from '../enums/combo.enum.js';
 import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 import { CalculationResult } from '../model/calculation.model.js';
+import { getCardEffectValue } from './card-helper.js';
 
 export const calculateChips = (
   baseValue: number,
@@ -33,7 +35,9 @@ export const getFlatMultiplier = (gameState: GameState): number =>
   UPGRADE_MAP.get(Upgrade.BigChipsMultiplier)!.value! *
     gameState.upgradeLevels[Upgrade.BigChipsMultiplier] +
   UPGRADE_MAP.get(Upgrade.MediumChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.MediumChipsMultiplier];
+    gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] +
+  getCardEffectValue(
+    gameState,CardEffectType.IncreaseRollMultiplier)
 
 export const getComboMultiplier = (
   gameState: GameState,

@@ -9,7 +9,7 @@ export const CARD_VALUES: Card[] = [
     name: 'Lucky Roll',
     rarity: CardRarity.Common,
     effect: {
-      description: `Decrease roll cooldown by 10%`,
+      description: `Decrease roll cooldown`,
       effectType: CardEffectType.ReduceCooldown,
       value: 0.1,
     },
@@ -19,9 +19,29 @@ export const CARD_VALUES: Card[] = [
     name: 'Easy Money',
     rarity: CardRarity.Common,
     effect: {
-      description: 'Get 20% of chips instantly',
+      description: 'Get 20% of current chips instantly',
       effectType: CardEffectType.InstantChips,
       value: 0.2,
+    },
+  },
+  {
+    id: uuidv4(),
+    name: 'Try Again',
+    rarity: CardRarity.Common,
+    effect: {
+      description: 'Reroll all cards',
+      effectType: CardEffectType.InstantCardReroll,
+      value: 0,
+    },
+  },
+  {
+    id: uuidv4(),
+    name: 'Chiper Chips',
+    rarity: CardRarity.Common,
+    effect: {
+      description: 'Increase chips multiplier',
+      effectType: CardEffectType.IncreaseRollMultiplier,
+      value: 0.1,
     },
   },
 ];

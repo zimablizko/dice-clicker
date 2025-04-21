@@ -33,7 +33,15 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     conditions: (gameState) =>
       gameState.shopUpgradeLevels[ShopUpgrade.AutoRoll] > 0,
   },
-
+  {
+    id: Upgrade.CardDraw,
+    name: 'Unlock cards',
+    baseCost: 250,
+    costMultiplier: 0,
+    value: 0,
+    levels: 1,
+    resourceType: ResourceType.Chips,
+  },
   {
     id: Upgrade.SmallChipsMultiplier,
     name: 'Small chips multiplier',

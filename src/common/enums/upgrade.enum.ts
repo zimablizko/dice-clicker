@@ -1,11 +1,12 @@
 export enum Upgrade {
   //multi-level upgrades
-  DiceAmount = 10,
-  ReduceCooldown = 11,
-  ReduceAutoRollCooldown = 15,
+  DiceAmount = 'diceAmountUpgrade',
+  ReduceCooldown = 'reduceCooldownUpgrade',
+  ReduceAutoRollCooldown = 'reduceAutoRollCooldownUpgrade',
 
   //one time upgrades
-  SmallChipsMultiplier = 12,
-  MediumChipsMultiplier = 13,
-  BigChipsMultiplier = 14,
+  CardDraw = 'cardDrawUnlock',
+  SmallChipsMultiplier = 'smallChipsMultiplierUpgrade',
+  MediumChipsMultiplier = 'mediumChipsMultiplierUpgrade',
+  BigChipsMultiplier = 'bigChipsMultiplierUpgrade',
 }

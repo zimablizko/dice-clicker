@@ -25,6 +25,7 @@ const upgradeLevels = {
   [Upgrade.MediumChipsMultiplier]: 0,
   [Upgrade.BigChipsMultiplier]: 0,
   [Upgrade.ReduceAutoRollCooldown]: 0,
+  [Upgrade.CardDraw]: 0,
 };
 
 const shopUpgradeLevels = {

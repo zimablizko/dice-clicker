@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { CARD_VALUES } from '../../common/consts/card-values.const.js';
+import { CardEffectType } from '../../common/enums/card-effect.enum.js';
 import { CardRarity } from '../../common/enums/card-rarity.enum.js';
 import { Card } from '../../common/model/card.model.js';
 import { applyInstantEffect } from '../../common/utils/card-helper.js';
@@ -82,6 +83,11 @@ const CardDrawModal = forwardRef((_, ref) => {
 
   const handleCardSelect = (index: number) => {
       const selectedCard = cards[index];
+      if (selectedCard.effect.effectType === CardEffectType.InstantCardReroll) {
+        const newCards = getRandomCards(3);
+        setCards(newCards);
+        return;
+      }
       dispatch(addCard(selectedCard));
       dispatch(increaseCardDrawPrice());
       applyInstantEffect(gameState,dispatch, selectedCard);
