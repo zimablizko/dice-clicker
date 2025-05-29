@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
 import { INITIAL_STATE } from '../common/consts/initial-state.const.js';
 import { Achievement } from '../common/enums/achievement.enum.js';
 import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
@@ -78,7 +79,7 @@ const gameStateSlice = createSlice({
       saveManager.save('dc_gameState', state);
     },
     increaseCardDrawPrice: (state: GameState) => {
-      state.cardDrawPrice = Math.round(state.cardDrawPrice * 1.15);  // 15% increase per draw
+      state.cardDrawPrice = Math.round(GAME_SETTINGS.baseCardCost * GAME_SETTINGS.baseCardCostIncrease ** state.cards.length);  // 15% increase per draw
       saveManager.save('dc_gameState', state);
     }
   },

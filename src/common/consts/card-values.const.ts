@@ -36,7 +36,7 @@ export const CARD_VALUES: Card[] = [
   },
   {
     id: uuidv4(),
-    name: 'Chiper Chips',
+    name: 'Cheaper Chips',
     rarity: CardRarity.Common,
     effect: {
       description: 'Increase chips multiplier',
