@@ -8,8 +8,10 @@ export type UpgradeProperties = {
   name: string;
   baseCost: number;
   costMultiplier: number;
-  value?: number;
   levels: number;
   resourceType: ResourceType;
-  conditions?: (gameState: GameState) => boolean;
+  valueFn: (gameState?: GameState) => number;
+  conditionsFn?: (gameState: GameState) => boolean;
+  descriptionFn?: (gameState: GameState) => string;
+  nextValueFn?: (gameState: GameState) => number;
 };

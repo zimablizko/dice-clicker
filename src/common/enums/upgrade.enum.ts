@@ -5,8 +5,9 @@ export enum Upgrade {
   ReduceAutoRollCooldown = 'reduceAutoRollCooldownUpgrade',
 
   //one time upgrades
-  CardDraw = 'cardDrawUnlock',
-  SmallChipsMultiplier = 'smallChipsMultiplierUpgrade',
-  MediumChipsMultiplier = 'mediumChipsMultiplierUpgrade',
-  BigChipsMultiplier = 'bigChipsMultiplierUpgrade',
+
+  ChipsMultiplierFromTotalRolls = 'chipsMultiplierFromTotalRollsUpgrade',
+  ChipsMultiplierFromBestRoll = 'chipsMultiplierFromBestRollUpgrade',
+  ChipsMultiplierFromTotalAchievements = 'chipsMultiplierFromTotalAchievementsUpgrade',
+  ChipsMultiplierFromTotalPlaytime = 'chipsMultiplierFromTotalPlaytimeUpgrade',
 }

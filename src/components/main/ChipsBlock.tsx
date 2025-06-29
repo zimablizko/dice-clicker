@@ -8,7 +8,7 @@ export default function ChipsBlock({ result: res }: ChipsBlockProps) {
   return (
     <div className="row">
       <div className="combo">
-        {res && res.comboProperties.name && (
+        {(res && res.comboProperties.name) && (
           <div className="combo-name">{res.comboProperties.name}</div>
         )}
       </div>

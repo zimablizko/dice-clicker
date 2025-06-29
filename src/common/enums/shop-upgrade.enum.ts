@@ -7,4 +7,5 @@ export enum ShopUpgrade {
 
   //one time upgrades
   AutoRoll = 'autoRollUnlock',
+  CardDraw = 'cardDrawUnlock',
 }

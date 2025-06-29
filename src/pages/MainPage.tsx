@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Upgrade } from '../common/enums/upgrade.enum.js';
+import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
 import { CalculationResult } from '../common/model/calculation.model.js';
 import { Dice } from '../common/model/dice.model.js';
-import { formatNumber } from '../common/utils/formatter.js';
+import { formatBigNumber } from '../common/utils/formatter.js';
 import CardCollection from '../components/cards/CardCollection.js';
 import CardDrawModal from '../components/cards/CardDrawModal.js';
 import ChipsBlock from '../components/main/ChipsBlock.js';
@@ -19,7 +19,8 @@ export default function MainPage() {
   );
 
   const cardsUnlocked = useSelector(
-    (state: { gamestate: GameState }) => state.gamestate.upgradeLevels[Upgrade.CardDraw] > 0,
+    (state: { gamestate: GameState }) =>
+      state.gamestate.shopUpgradeLevels[ShopUpgrade.CardDraw] > 0,
   );
 
   const [res, setRes] = useState<CalculationResult | undefined>();
@@ -38,29 +39,22 @@ export default function MainPage() {
       <ChipsBlock result={res} />
       <DiceBoard dices={dices} />
       <RollButton onRollResult={setRes} onDicesChange={setDices} />
-      
-      
-      
+
       {cardsUnlocked && (
         <>
-        <div className="row">
-        <button 
-          className="btn card-draw-btn" 
-          onClick={handleDrawCardClick}
-          disabled={gameState.resources.chips < gameState.cardDrawPrice}
-        >
-          Draw Card ({formatNumber(gameState.cardDrawPrice)} chips)
-        </button>
-      </div>
-        <CardCollection cards={gameState.cards} />
-        <CardDrawModal 
-        ref={cardDrawModalRef} 
-      />
+          <div className="row">
+            <button
+              className="btn card-draw-btn"
+              onClick={handleDrawCardClick}
+              disabled={gameState.resources.chips < gameState.cardDrawPrice}
+            >
+              Draw Card ({formatBigNumber(gameState.cardDrawPrice)} chips)
+            </button>
+          </div>
+          <CardCollection cards={gameState.cards} />
+          <CardDrawModal ref={cardDrawModalRef} />
         </>
       )}
-      
-      
-      
     </>
   );
 }

@@ -18,6 +18,9 @@ export interface GameStats {
   bestRoll: number;
   maxChips: number;
   payouts: number;
+  startTime: number; // in seconds, used to calculate total time played
+  totalTimePlayed: number; // in seconds
+  achievementsUnlocked: number;
 }
 
 export interface Resources {

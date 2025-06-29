@@ -8,6 +8,13 @@ import { Upgrade } from '../enums/upgrade.enum.js';
 import { CalculationResult } from '../model/calculation.model.js';
 import { getCardEffectValue } from './card-helper.js';
 
+const flatMultiplierUpgrades = [
+  Upgrade.ChipsMultiplierFromTotalRolls,
+  Upgrade.ChipsMultiplierFromTotalAchievements,
+  Upgrade.ChipsMultiplierFromBestRoll,
+  Upgrade.ChipsMultiplierFromTotalPlaytime,
+];
+
 export const calculateChips = (
   baseValue: number,
   combo: Combo,
@@ -29,15 +36,16 @@ export const calculateChips = (
 };
 
 export const getFlatMultiplier = (gameState: GameState): number =>
-  1 +
-  UPGRADE_MAP.get(Upgrade.SmallChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.SmallChipsMultiplier] +
-  UPGRADE_MAP.get(Upgrade.BigChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.BigChipsMultiplier] +
-  UPGRADE_MAP.get(Upgrade.MediumChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] +
-  getCardEffectValue(
-    gameState,CardEffectType.IncreaseRollMultiplier)
+  1 *
+  flatMultiplierUpgrades.reduce(
+    (acc, upgrade) =>
+      acc *
+      (gameState.upgradeLevels[upgrade] > 0
+        ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
+        : 1),
+    1,
+  ) *
+  getCardEffectValue(gameState, CardEffectType.IncreaseRollMultiplier);
 
 export const getComboMultiplier = (
   gameState: GameState,
@@ -48,17 +56,17 @@ export const getComboMultiplier = (
   switch (combo) {
     case Combo.Pair:
       comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.PairMultiplier)!.value! *
+        UPGRADE_MAP.get(ShopUpgrade.PairMultiplier)!.valueFn() *
         gameState.shopUpgradeLevels[ShopUpgrade.PairMultiplier];
       break;
     case Combo.TwoPairs:
       comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.TwoPairsMultiplier)!.value! *
+        UPGRADE_MAP.get(ShopUpgrade.TwoPairsMultiplier)!.valueFn() *
         gameState.shopUpgradeLevels[ShopUpgrade.TwoPairsMultiplier];
       break;
     case Combo.ThreeOfAKind:
       comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.ThreeOfAKindMultiplier)!.value! *
+        UPGRADE_MAP.get(ShopUpgrade.ThreeOfAKindMultiplier)!.valueFn() *
         gameState.shopUpgradeLevels[ShopUpgrade.ThreeOfAKindMultiplier];
       break;
   }

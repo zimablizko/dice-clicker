@@ -28,11 +28,15 @@ const gameStateSlice = createSlice({
     },
     changeStats: (state: GameState, action: StateAction<GameStats>) => {
       state.stats = action.payload;
-
       saveManager.save('dc_gameState', state);
     },
     unlockAchievement: (state: GameState, action: StateAction<Achievement>) => {
+      if (state.achievements[action.payload]) {
+        console.warn(`Achievement ${action.payload} already unlocked.`);
+        return;
+      }
       state.achievements[action.payload] = true;
+      state.stats.achievementsUnlocked++;
       saveManager.save('dc_gameState', state);
     },
     increaseUpgradeLevel: (state: GameState, action: StateAction<Upgrade>) => {
@@ -57,7 +61,7 @@ const gameStateSlice = createSlice({
       const stats = { ...state.stats };
       const coinReward = action.payload;
       const coins = state.resources.coins + coinReward;
-      
+
       state = initialState;
       state = {
         ...initialState,
@@ -67,11 +71,17 @@ const gameStateSlice = createSlice({
           ...initialState.resources,
           coins: coins,
         },
-        stats: { ...initialState.stats, payouts: stats.payouts + 1 },
+        stats: {
+          ...initialState.stats,
+          payouts: stats.payouts + 1,
+          totalTimePlayed: stats.totalTimePlayed,
+          startTime: stats.startTime,
+          achievementsUnlocked: stats.achievementsUnlocked,
+        },
         cards: [], // Reset cards on payout
         cardDrawPrice: 10, // Reset card draw price on payout
       };
-      
+
       saveManager.save('dc_gameState', state);
     },
     addCard: (state: GameState, action: StateAction<Card>) => {
@@ -79,9 +89,16 @@ const gameStateSlice = createSlice({
       saveManager.save('dc_gameState', state);
     },
     increaseCardDrawPrice: (state: GameState) => {
-      state.cardDrawPrice = Math.round(GAME_SETTINGS.baseCardCost * GAME_SETTINGS.baseCardCostIncrease ** state.cards.length);  // 15% increase per draw
+      state.cardDrawPrice = Math.round(
+        GAME_SETTINGS.baseCardCost *
+          GAME_SETTINGS.baseCardCostIncrease ** state.cards.length,
+      ); // 15% increase per draw
       saveManager.save('dc_gameState', state);
-    }
+    },
+    setTotalTimePlayed: (state: GameState, action: StateAction<number>) => {
+      state.stats.totalTimePlayed = action.payload;
+      saveManager.save('dc_gameState', state);
+    },
   },
 });
 
@@ -96,5 +113,6 @@ export const {
   reset,
   payout,
   addCard,
-  increaseCardDrawPrice
+  increaseCardDrawPrice,
+  setTotalTimePlayed,
 } = gameStateSlice.actions;

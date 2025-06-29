@@ -49,6 +49,8 @@ export default function RollButton({
     onRollResult(undefined);
     const diceArray: Dice[] = [];
     const dicesAmount = getDiceAmount(gameState);
+    console.log(`Rolling ${dicesAmount} dices...`);
+
     const cooldown = getCooldown(gameState);
 
     for (let i = 0; i < dicesAmount; i++) {
