@@ -1,9 +1,9 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { GAME_SETTINGS } from '../consts/game-settings.const.js';
 import { UPGRADE_MAP } from '../consts/upgrade-values.const.js';
-import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
+import { Upgrade } from '../enums/upgrade.enum.js';
 
-const flatCoinRewardUpgrades = [ShopUpgrade.CoinGainMultiplier];
+const flatCoinRewardUpgrades = [Upgrade.CoinGainMultiplier];
 
 export const getCoinReward = (gameState: GameState): number =>
   Math.round(
@@ -11,7 +11,7 @@ export const getCoinReward = (gameState: GameState): number =>
       flatCoinRewardUpgrades.reduce(
         (acc, upgrade) =>
           acc *
-          (gameState.shopUpgradeLevels[upgrade] > 0
+          (gameState.upgradeLevels[upgrade] > 0
             ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
             : 1),
         1,

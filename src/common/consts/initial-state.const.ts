@@ -1,6 +1,5 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { Achievement } from '../enums/achievement.enum.js';
-import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 
 const achievements: Record<Achievement, boolean> = Object.fromEntries(
@@ -10,10 +9,6 @@ const achievements: Record<Achievement, boolean> = Object.fromEntries(
 const upgradeLevels: Record<Upgrade, number> = Object.fromEntries(
   Object.values(Upgrade).map((upgrade) => [upgrade, 0]),
 ) as Record<Upgrade, number>;
-
-const shopUpgradeLevels: Record<ShopUpgrade, number> = Object.fromEntries(
-  Object.values(ShopUpgrade).map((upgrade) => [upgrade, 0]),
-) as Record<ShopUpgrade, number>;
 
 export const INITIAL_STATE: GameState = {
   resources: { chips: 0, coins: 0 },
@@ -28,7 +23,6 @@ export const INITIAL_STATE: GameState = {
   },
   achievements,
   upgradeLevels,
-  shopUpgradeLevels,
   cards: [],
   cardDrawPrice: 10,
 };

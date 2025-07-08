@@ -1,5 +1,4 @@
 import { ResourceType } from '../enums/resource-type.enum.js';
-import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 import { UpgradeProperties } from '../model/upgrade.model.js';
 import { GAME_SETTINGS } from './game-settings.const.js';
@@ -43,10 +42,9 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     costMultiplier: 5,
     valueFn: (gameState) =>
       1.1 ** gameState!.upgradeLevels[Upgrade.ReduceAutoRollCooldown],
-    levels: 1000,
+    levels: 5,
     resourceType: ResourceType.Chips,
-    conditionsFn: (gameState) =>
-      gameState.shopUpgradeLevels[ShopUpgrade.AutoRoll] > 0,
+    conditionsFn: (gameState) => gameState.upgradeLevels[Upgrade.AutoRoll] > 0,
   },
 
   {
@@ -88,7 +86,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
 
 const COINS_UPGRADES: Array<UpgradeProperties> = [
   {
-    id: ShopUpgrade.CardDraw,
+    id: Upgrade.CardDraw,
     name: 'Unlock cards',
     baseCost: 250,
     costMultiplier: 0,
@@ -97,17 +95,17 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     resourceType: ResourceType.Coins,
   },
   {
-    id: ShopUpgrade.PairMultiplier,
+    id: Upgrade.PairMultiplier,
     name: 'Pair combo multiplier',
     baseCost: 1,
     costMultiplier: 2,
     valueFn: (gameState) =>
-      1.3 ** gameState!.shopUpgradeLevels[ShopUpgrade.PairMultiplier],
+      1.3 ** gameState!.upgradeLevels[Upgrade.PairMultiplier],
     levels: 5,
     resourceType: ResourceType.Coins,
   },
   {
-    id: ShopUpgrade.TwoPairsMultiplier,
+    id: Upgrade.TwoPairsMultiplier,
     name: 'Two pairs combo multiplier',
     baseCost: 10,
     costMultiplier: 5,
@@ -119,7 +117,7 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     },
   },
   {
-    id: ShopUpgrade.ThreeOfAKindMultiplier,
+    id: Upgrade.ThreeOfAKindMultiplier,
     name: 'Three of a kind combo multiplier',
     baseCost: 100,
     costMultiplier: 10,
@@ -131,7 +129,7 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     },
   },
   {
-    id: ShopUpgrade.AutoRoll,
+    id: Upgrade.AutoRoll,
     name: 'Unlock auto roll upgrade',
     baseCost: 100,
     costMultiplier: 0,
@@ -140,12 +138,12 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     resourceType: ResourceType.Coins,
   },
   {
-    id: ShopUpgrade.CoinGainMultiplier,
+    id: Upgrade.CoinGainMultiplier,
     name: 'Coin gain multiplier',
     baseCost: 10,
     costMultiplier: 10,
     valueFn: (gameState) =>
-      2 ** gameState!.shopUpgradeLevels[ShopUpgrade.CoinGainMultiplier],
+      2 ** gameState!.upgradeLevels[Upgrade.CoinGainMultiplier],
     levels: 5,
     resourceType: ResourceType.Coins,
   },
@@ -156,5 +154,6 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   ...COINS_UPGRADES,
 ];
 
-export const UPGRADE_MAP: Map<Upgrade | ShopUpgrade, UpgradeProperties> =
-  new Map(UPGRADE_VALUES.map((upgrade) => [upgrade.id, upgrade]));
+export const UPGRADE_MAP: Map<Upgrade | Upgrade, UpgradeProperties> = new Map(
+  UPGRADE_VALUES.map((upgrade) => [upgrade.id, upgrade]),
+);

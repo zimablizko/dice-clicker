@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
+import { Upgrade } from '../common/enums/upgrade.enum.js';
 import { CalculationResult } from '../common/model/calculation.model.js';
 import { Dice } from '../common/model/dice.model.js';
 import { formatBigNumber } from '../common/utils/formatter.js';
@@ -20,7 +20,7 @@ export default function MainPage() {
 
   const cardsUnlocked = useSelector(
     (state: { gamestate: GameState }) =>
-      state.gamestate.shopUpgradeLevels[ShopUpgrade.CardDraw] > 0,
+      state.gamestate.upgradeLevels[Upgrade.CardDraw] > 0,
   );
 
   const [res, setRes] = useState<CalculationResult | undefined>();

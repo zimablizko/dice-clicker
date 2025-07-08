@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { UPGRADE_VALUES } from '../common/consts/upgrade-values.const.js';
 import { ResourceType } from '../common/enums/resource-type.enum.js';
-import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
 import { UpgradeProperties } from '../common/model/upgrade.model.js';
 import { formatBigNumber, formatDecimal } from '../common/utils/formatter.js';
-import { changeCoins, increaseShopUpgradeLevel } from '../store/game-state.js';
+import { changeCoins, increaseUpgradeLevel } from '../store/game-state.js';
 import { GameState } from '../store/model/game-state.model.js';
 
 export default function StorePage() {
@@ -15,24 +14,21 @@ export default function StorePage() {
 
   const checkUpgradeBtnDisabled = (upgrade: UpgradeProperties) =>
     gameState.resources.coins < getUpgradeCost(upgrade) ||
-    gameState.shopUpgradeLevels[upgrade.id as ShopUpgrade] >= upgrade.levels;
+    gameState.upgradeLevels[upgrade.id] >= upgrade.levels;
 
   const checkUpgradeAcquired = (upgrade: UpgradeProperties) => {
-    return (
-      gameState.shopUpgradeLevels[upgrade.id as ShopUpgrade] >= upgrade.levels
-    );
+    return gameState.upgradeLevels[upgrade.id] >= upgrade.levels;
   };
 
   const getUpgradeCost = (upgrade: UpgradeProperties) =>
     upgrade.baseCost *
-    upgrade.costMultiplier **
-      gameState.shopUpgradeLevels[upgrade.id as ShopUpgrade];
+    upgrade.costMultiplier ** gameState.upgradeLevels[upgrade.id];
 
   const handleUpgradeClick = (upgrade: UpgradeProperties) => {
     const upgradeCost = getUpgradeCost(upgrade);
     if (gameState.resources.coins >= upgradeCost) {
       dispatch(changeCoins(-upgradeCost));
-      dispatch(increaseShopUpgradeLevel(upgrade.id as ShopUpgrade));
+      dispatch(increaseUpgradeLevel(upgrade.id));
     }
   };
 

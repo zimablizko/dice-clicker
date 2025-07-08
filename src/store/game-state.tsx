@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
 import { INITIAL_STATE } from '../common/consts/initial-state.const.js';
+import { UPGRADE_MAP } from '../common/consts/upgrade-values.const.js';
 import { Achievement } from '../common/enums/achievement.enum.js';
-import { ShopUpgrade } from '../common/enums/shop-upgrade.enum.js';
+import { ResourceType } from '../common/enums/resource-type.enum.js';
 import { Upgrade } from '../common/enums/upgrade.enum.js';
 import { Card } from '../common/model/card.model.js';
 import { saveManager } from '../common/utils/save-manager.js';
@@ -43,13 +44,6 @@ const gameStateSlice = createSlice({
       state.upgradeLevels[action.payload]++;
       saveManager.save('dc_gameState', state);
     },
-    increaseShopUpgradeLevel: (
-      state: GameState,
-      action: StateAction<ShopUpgrade>,
-    ) => {
-      state.shopUpgradeLevels[action.payload]++;
-      saveManager.save('dc_gameState', state);
-    },
     reset: (state: GameState) => {
       state = initialState;
       saveManager.save('dc_gameState', state);
@@ -57,7 +51,15 @@ const gameStateSlice = createSlice({
     payout: (state: GameState, action: StateAction<number>) => {
       //reset state except coins, achievements, and shop upgrades
       const achievements = { ...state.achievements };
-      const shopUpgradeLevels = { ...state.shopUpgradeLevels };
+      const savedUpgradeLevels = { ...state.upgradeLevels };
+      for (const upgrade in state.upgradeLevels) {
+        if (
+          UPGRADE_MAP.get(upgrade as Upgrade)?.resourceType !==
+          ResourceType.Chips
+        ) {
+          savedUpgradeLevels[upgrade as Upgrade] = 0;
+        }
+      }
       const stats = { ...state.stats };
       const coinReward = action.payload;
       const coins = state.resources.coins + coinReward;
@@ -65,7 +67,7 @@ const gameStateSlice = createSlice({
       state = initialState;
       state = {
         ...initialState,
-        shopUpgradeLevels,
+        upgradeLevels: savedUpgradeLevels,
         achievements,
         resources: {
           ...initialState.resources,
@@ -109,7 +111,6 @@ export const {
   changeStats,
   unlockAchievement,
   increaseUpgradeLevel,
-  increaseShopUpgradeLevel,
   reset,
   payout,
   addCard,
