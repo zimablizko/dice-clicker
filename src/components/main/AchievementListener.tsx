@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ACHIEVEMENT_VALUES } from '../../common/consts/achievement-values.const.js';
 import { checkForAchievements } from '../../common/utils/achievement-helper.js';
 import {
+  setFirstLayerTimePlayed,
   setTotalTimePlayed,
   unlockAchievement,
 } from '../../store/game-state.js';
@@ -18,6 +19,15 @@ export default function AchievementListener() {
   const refreshTotalTimePlayed = () => {
     const currentTime = Math.floor(Date.now() / 1000);
     dispatch(setTotalTimePlayed(currentTime - gameState.stats.startTime));
+  };
+
+  const refreshFirstLayerTimePlayed = () => {
+    const currentTime = Math.floor(Date.now() / 1000);
+    dispatch(
+      setFirstLayerTimePlayed(
+        currentTime - gameState.stats.firstLayerStartTime,
+      ),
+    );
   };
 
   useEffect(() => {
@@ -39,6 +49,7 @@ export default function AchievementListener() {
   useEffect(() => {
     const interval = setInterval(() => {
       refreshTotalTimePlayed();
+      refreshFirstLayerTimePlayed();
     }, 5000);
 
     return () => clearInterval(interval);

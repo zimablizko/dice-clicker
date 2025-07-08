@@ -17,7 +17,9 @@ export interface GameStats {
   maxChips: number;
   payouts: number;
   startTime: number; // in seconds, used to calculate total time played
+  firstLayerStartTime: number; // in seconds, used to calculate time played in the first layer
   totalTimePlayed: number; // in seconds
+  firstLayerTimePlayed: number; // in seconds
   achievementsUnlocked: number;
 }
 

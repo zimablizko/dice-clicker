@@ -101,6 +101,13 @@ const gameStateSlice = createSlice({
       state.stats.totalTimePlayed = action.payload;
       saveManager.save('dc_gameState', state);
     },
+    setFirstLayerTimePlayed: (
+      state: GameState,
+      action: StateAction<number>,
+    ) => {
+      state.stats.firstLayerTimePlayed = action.payload;
+      saveManager.save('dc_gameState', state);
+    },
   },
 });
 
@@ -116,4 +123,5 @@ export const {
   addCard,
   increaseCardDrawPrice,
   setTotalTimePlayed,
+  setFirstLayerTimePlayed,
 } = gameStateSlice.actions;

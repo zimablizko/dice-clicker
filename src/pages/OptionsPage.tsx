@@ -33,6 +33,10 @@ export default function OptionsPage() {
         <span>Best roll: {gameState.stats.bestRoll}</span>
         <span>Rolls: {gameState.stats.diceRolls}</span>
         <span>
+          Time played this payout: {gameState.stats.firstLayerTimePlayed}{' '}
+          seconds
+        </span>
+        <span>
           Total time played: {gameState.stats.totalTimePlayed} seconds
         </span>
         <span>
