@@ -15,6 +15,8 @@ const flatMultiplierUpgrades = [
   Upgrade.ChipsMultiplierFromTotalPlaytime,
 ];
 
+const pairComboUpgrades = [ShopUpgrade.PairMultiplier];
+
 export const calculateChips = (
   baseValue: number,
   combo: Combo,
@@ -52,12 +54,17 @@ export const getComboMultiplier = (
   combo: Combo,
 ): number => {
   const comboProperties = COMBO_VALUES.get(combo)!;
-  let comboMultiplier = comboProperties.multiplier + 1;
+  let comboMultiplier = comboProperties.multiplier;
   switch (combo) {
     case Combo.Pair:
-      comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.PairMultiplier)!.valueFn() *
-        gameState.shopUpgradeLevels[ShopUpgrade.PairMultiplier];
+      comboMultiplier *= pairComboUpgrades.reduce(
+        (acc, upgrade) =>
+          acc *
+          (gameState.shopUpgradeLevels[upgrade] > 0
+            ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
+            : 1),
+        1,
+      );
       break;
     case Combo.TwoPairs:
       comboMultiplier +=

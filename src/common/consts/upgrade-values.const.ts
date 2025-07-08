@@ -32,7 +32,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     baseCost: 1000,
     costMultiplier: 0,
     valueFn: (gameState) =>
-      1 + Math.sqrt(Math.max(1, gameState!.stats.totalTimePlayed)) * 0.1,
+      1 + Math.sqrt(Math.max(1, gameState!.stats.totalTimePlayed)) * 0.01,
     levels: 1,
     resourceType: ResourceType.Chips,
   },
@@ -52,7 +52,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.ChipsMultiplierFromTotalRolls,
     name: 'Multiplier to chips, based on total rolls made',
-    baseCost: 500,
+    baseCost: 5000,
     costMultiplier: 0,
     valueFn: (gameState) =>
       1 + Math.log10(Math.max(1, gameState!.stats.diceRolls)) * 0.5,
@@ -63,7 +63,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.ChipsMultiplierFromBestRoll,
     name: 'Multiplier to chips, based on best roll',
-    baseCost: 2000,
+    baseCost: 15000,
     costMultiplier: 0,
     valueFn: (gameState) =>
       1 + Math.sqrt(Math.max(1, gameState!.stats.bestRoll)) * 0.05,
@@ -75,7 +75,7 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
     id: Upgrade.ChipsMultiplierFromTotalAchievements,
     name: 'Multiplier to chips, based on total achievements unlocked',
-    baseCost: 10000,
+    baseCost: 40000,
     costMultiplier: 0,
     valueFn: (gameState) =>
       1 + Math.sqrt(Math.max(1, gameState!.stats.achievementsUnlocked)) * 0.4,
@@ -101,7 +101,8 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     name: 'Pair combo multiplier',
     baseCost: 1,
     costMultiplier: 2,
-    valueFn: () => 0.3,
+    valueFn: (gameState) =>
+      1.3 ** gameState!.shopUpgradeLevels[ShopUpgrade.PairMultiplier],
     levels: 5,
     resourceType: ResourceType.Coins,
   },
