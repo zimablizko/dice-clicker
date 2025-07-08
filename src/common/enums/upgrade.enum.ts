@@ -1,11 +1,19 @@
 export enum Upgrade {
   //multi-level upgrades
-  DiceAmount = 10,
-  ReduceCooldown = 11,
-  ReduceAutoRollCooldown = 15,
+  DiceAmount = 'diceAmountUpgrade',
+  ReduceCooldown = 'reduceCooldownUpgrade',
+  ReduceAutoRollCooldown = 'reduceAutoRollCooldownUpgrade',
+  PairMultiplier = 'pairMultiplierUpgrade',
+  TwoPairsMultiplier = 'twoPairsMultiplierUpgrade',
+  ThreeOfAKindMultiplier = 'threeOfAKindMultiplierUpgrade',
+  CoinGainMultiplier = 'coinGainMultiplierUpgrade',
+  ComboMultiplier = 'comboMultiplierUpgrade',
 
   //one time upgrades
-  SmallChipsMultiplier = 12,
-  MediumChipsMultiplier = 13,
-  BigChipsMultiplier = 14,
+  ChipsMultiplierFromTotalRolls = 'chipsMultiplierFromTotalRollsUpgrade',
+  ChipsMultiplierFromBestRoll = 'chipsMultiplierFromBestRollUpgrade',
+  ChipsMultiplierFromTotalAchievements = 'chipsMultiplierFromTotalAchievementsUpgrade',
+  ChipsMultiplierFromTotalPlaytime = 'chipsMultiplierFromTotalPlaytimeUpgrade',
+  AutoRoll = 'autoRollUnlock',
+  CardDraw = 'cardDrawUnlock',
 }

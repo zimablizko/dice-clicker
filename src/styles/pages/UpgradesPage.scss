@@ -1,15 +1,17 @@
 .upgrades-container {
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 
-  .upgrade {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .upgrade-btn {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.5);
-    padding: 1rem;
-    gap: 1rem;
+    gap: 0.5rem;
 
     .name {
       margin: 0;
@@ -17,10 +19,6 @@
 
     .cost {
       margin: 0;
-    }
-
-    @media (max-width: 600px) {
-      grid-template-columns: 1fr 1fr;
     }
   }
 }

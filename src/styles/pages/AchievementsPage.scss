@@ -1,7 +1,11 @@
 .achievements-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  grid-template-columns: repeat(4, minmax(7rem, 1fr));
   gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   .achievement {
     display: flex;
@@ -28,6 +32,7 @@
     .name {
       font-size: 1.2rem;
       margin: 0;
+      font-weight: normal;
     }
 
     .description {

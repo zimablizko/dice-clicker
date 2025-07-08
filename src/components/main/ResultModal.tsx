@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
-import { formatNumber } from '../../common/utils/formatter.js';
+import { formatBigNumber } from '../../common/utils/formatter.js';
 import { payout } from '../../store/game-state.js';
 
 type ResultModalProps = {
@@ -35,7 +35,7 @@ const ResultModal = forwardRef(({ coinReward }: ResultModalProps, ref) => {
       {/* <p>Dice rolls: {gameState.stats.diceRolls}</p>
       <p>Best roll: {gameState.stats.bestRoll}</p> */}
       <p>
-        You will receive {formatNumber(coinReward)}{' '}
+        You will receive {formatBigNumber(coinReward)}{' '}
         {coinReward === 1 ? 'coin' : 'coins'}, but lose your chips and upgrades.
       </p>
       <div>

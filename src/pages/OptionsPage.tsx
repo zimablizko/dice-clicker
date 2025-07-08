@@ -32,6 +32,17 @@ export default function OptionsPage() {
         <span>Payouts: {gameState.stats.payouts}</span>
         <span>Best roll: {gameState.stats.bestRoll}</span>
         <span>Rolls: {gameState.stats.diceRolls}</span>
+        <span>
+          Time played this payout: {gameState.stats.firstLayerTimePlayed}{' '}
+          seconds
+        </span>
+        <span>
+          Total time played: {gameState.stats.totalTimePlayed} seconds
+        </span>
+        <span>
+          Start time:{' '}
+          {new Date(gameState.stats.startTime * 1000).toLocaleString('ru-RU')}
+        </span>
       </div>
     </>
   );

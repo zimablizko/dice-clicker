@@ -1,10 +1,22 @@
 import { GameState } from '../../store/model/game-state.model.js';
 import { COMBO_VALUES } from '../consts/combo-values.const.js';
 import { UPGRADE_MAP } from '../consts/upgrade-values.const.js';
+import { CardEffectType } from '../enums/card-effect.enum.js';
 import { Combo } from '../enums/combo.enum.js';
-import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 import { CalculationResult } from '../model/calculation.model.js';
+import { getCardEffectValue } from './card-helper.js';
+
+const flatMultiplierUpgrades = [
+  Upgrade.ChipsMultiplierFromTotalRolls,
+  Upgrade.ChipsMultiplierFromTotalAchievements,
+  Upgrade.ChipsMultiplierFromBestRoll,
+  Upgrade.ChipsMultiplierFromTotalPlaytime,
+];
+
+const flatComboMultiplierUpgrades = [Upgrade.ComboMultiplier];
+
+const pairComboUpgrades = [Upgrade.PairMultiplier];
 
 export const calculateChips = (
   baseValue: number,
@@ -27,35 +39,52 @@ export const calculateChips = (
 };
 
 export const getFlatMultiplier = (gameState: GameState): number =>
-  1 +
-  UPGRADE_MAP.get(Upgrade.SmallChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.SmallChipsMultiplier] +
-  UPGRADE_MAP.get(Upgrade.BigChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.BigChipsMultiplier] +
-  UPGRADE_MAP.get(Upgrade.MediumChipsMultiplier)!.value! *
-    gameState.upgradeLevels[Upgrade.MediumChipsMultiplier];
+  1 *
+  flatMultiplierUpgrades.reduce(
+    (acc, upgrade) =>
+      acc *
+      (gameState.upgradeLevels[upgrade] > 0
+        ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
+        : 1),
+    1,
+  ) *
+  getCardEffectValue(gameState, CardEffectType.IncreaseRollMultiplier);
 
 export const getComboMultiplier = (
   gameState: GameState,
   combo: Combo,
 ): number => {
   const comboProperties = COMBO_VALUES.get(combo)!;
-  let comboMultiplier = comboProperties.multiplier + 1;
+  let comboMultiplier =
+    comboProperties.multiplier *
+    flatComboMultiplierUpgrades.reduce(
+      (acc, upgrade) =>
+        acc *
+        (gameState.upgradeLevels[upgrade] > 0
+          ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
+          : 1),
+      1,
+    );
   switch (combo) {
     case Combo.Pair:
-      comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.PairMultiplier)!.value! *
-        gameState.shopUpgradeLevels[ShopUpgrade.PairMultiplier];
+      comboMultiplier *= pairComboUpgrades.reduce(
+        (acc, upgrade) =>
+          acc *
+          (gameState.upgradeLevels[upgrade] > 0
+            ? UPGRADE_MAP.get(upgrade)!.valueFn(gameState)
+            : 1),
+        1,
+      );
       break;
     case Combo.TwoPairs:
       comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.TwoPairsMultiplier)!.value! *
-        gameState.shopUpgradeLevels[ShopUpgrade.TwoPairsMultiplier];
+        UPGRADE_MAP.get(Upgrade.TwoPairsMultiplier)!.valueFn() *
+        gameState.upgradeLevels[Upgrade.TwoPairsMultiplier];
       break;
     case Combo.ThreeOfAKind:
       comboMultiplier +=
-        UPGRADE_MAP.get(ShopUpgrade.ThreeOfAKindMultiplier)!.value! *
-        gameState.shopUpgradeLevels[ShopUpgrade.ThreeOfAKindMultiplier];
+        UPGRADE_MAP.get(Upgrade.ThreeOfAKindMultiplier)!.valueFn() *
+        gameState.upgradeLevels[Upgrade.ThreeOfAKindMultiplier];
       break;
   }
   return comboMultiplier;

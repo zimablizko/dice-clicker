@@ -1,7 +1,7 @@
 import { ResourceType } from '../enums/resource-type.enum.js';
-import { ShopUpgrade } from '../enums/shop-upgrade.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 import { UpgradeProperties } from '../model/upgrade.model.js';
+import { GAME_SETTINGS } from './game-settings.const.js';
 
 const CHIPS_UPGRADES: Array<UpgradeProperties> = [
   {
@@ -9,7 +9,9 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     name: 'Extra Dices',
     baseCost: 10,
     costMultiplier: 10,
-    value: 1,
+    valueFn: (gameState) =>
+      gameState!.upgradeLevels[Upgrade.DiceAmount] +
+      GAME_SETTINGS.diceInitAmount,
     levels: 5,
     resourceType: ResourceType.Chips,
   },
@@ -18,104 +20,141 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     name: 'Cooldown reduction',
     baseCost: 150,
     costMultiplier: 3,
-    value: 1.1,
+    valueFn: (gameState) =>
+      1.1 ** gameState!.upgradeLevels[Upgrade.ReduceCooldown],
     levels: 1000,
+    resourceType: ResourceType.Chips,
+  },
+  {
+    id: Upgrade.ChipsMultiplierFromBestRoll,
+    name: 'Multiplier to chips, based on best roll',
+    baseCost: 1000,
+    costMultiplier: 0,
+    valueFn: (gameState) =>
+      1 + Math.sqrt(Math.max(1, gameState!.stats.bestRoll)) * 0.05,
+    levels: 1,
+    resourceType: ResourceType.Chips,
+    // conditionsFn: (gameState) =>
+    //   gameState.upgradeLevels[Upgrade.ChipsMultiplierFromTotalRolls] >= 1,
+  },
+  {
+    id: Upgrade.ChipsMultiplierFromTotalPlaytime,
+    name: 'Multiplier to chips, based on total playtime',
+    baseCost: 2000,
+    costMultiplier: 0,
+    valueFn: (gameState) =>
+      1 + Math.sqrt(Math.max(1, gameState!.stats.totalTimePlayed)) * 0.01,
+    levels: 1,
+    resourceType: ResourceType.Chips,
+  },
+  {
+    id: Upgrade.ComboMultiplier,
+    name: 'Combo multiplier',
+    baseCost: 4000,
+    costMultiplier: 5,
+    valueFn: (gameState) =>
+      1 + 0.5 * gameState!.upgradeLevels[Upgrade.ComboMultiplier] || 0,
+    levels: 5,
     resourceType: ResourceType.Chips,
   },
   {
     id: Upgrade.ReduceAutoRollCooldown,
     name: 'Auto-roll Cooldown reduction',
-    baseCost: 1500,
+    baseCost: 4000,
     costMultiplier: 5,
-    value: 1.1,
-    levels: 1000,
+    valueFn: (gameState) =>
+      1.1 ** gameState!.upgradeLevels[Upgrade.ReduceAutoRollCooldown],
+    levels: 5,
     resourceType: ResourceType.Chips,
-    conditions: (gameState) =>
-      gameState.shopUpgradeLevels[ShopUpgrade.AutoRoll] > 0,
+    conditionsFn: (gameState) => gameState.upgradeLevels[Upgrade.AutoRoll] > 0,
   },
 
   {
-    id: Upgrade.SmallChipsMultiplier,
-    name: 'Small chips multiplier',
-    baseCost: 500,
+    id: Upgrade.ChipsMultiplierFromTotalRolls,
+    name: 'Multiplier to chips, based on total rolls made',
+    baseCost: 15000,
     costMultiplier: 0,
-    value: 0.2,
+    valueFn: (gameState) =>
+      1 + Math.log10(Math.max(1, gameState!.stats.diceRolls)) * 0.5,
+
     levels: 1,
     resourceType: ResourceType.Chips,
   },
+
   {
-    id: Upgrade.MediumChipsMultiplier,
-    name: 'Medium chips multiplier',
-    baseCost: 2000,
+    id: Upgrade.ChipsMultiplierFromTotalAchievements,
+    name: 'Multiplier to chips, based on total achievements unlocked',
+    baseCost: 40000,
     costMultiplier: 0,
-    value: 0.5,
+    valueFn: (gameState) =>
+      1 + Math.sqrt(Math.max(1, gameState!.stats.achievementsUnlocked)) * 0.4,
     levels: 1,
     resourceType: ResourceType.Chips,
-    conditions: (gameState) =>
-      gameState.upgradeLevels[Upgrade.SmallChipsMultiplier] >= 1,
-  },
-  {
-    id: Upgrade.BigChipsMultiplier,
-    name: 'Big chips multiplier',
-    baseCost: 10000,
-    costMultiplier: 0,
-    value: 0.8,
-    levels: 1,
-    resourceType: ResourceType.Chips,
-    conditions: (gameState) =>
-      gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] >= 1,
+    // conditionsFn: (gameState) =>
+    //   gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] >= 1,
   },
 ];
 
 const COINS_UPGRADES: Array<UpgradeProperties> = [
   {
-    id: ShopUpgrade.PairMultiplier,
-    name: 'Pair combo multiplier',
-    baseCost: 1,
-    costMultiplier: 2,
-    value: 0.3,
-    levels: 5,
-    resourceType: ResourceType.Coins,
-  },
-  {
-    id: ShopUpgrade.TwoPairsMultiplier,
-    name: 'Two pairs combo multiplier',
-    baseCost: 10,
-    costMultiplier: 5,
-    value: 0.6,
-    levels: 5,
-    resourceType: ResourceType.Coins,
-    conditions: (gameState) => {
-      return gameState.stats.payouts >= 3;
-    },
-  },
-  {
-    id: ShopUpgrade.ThreeOfAKindMultiplier,
-    name: 'Three of a kind combo multiplier',
-    baseCost: 100,
-    costMultiplier: 10,
-    value: 0.9,
-    levels: 5,
-    resourceType: ResourceType.Coins,
-    conditions: (gameState) => {
-      return gameState.stats.payouts >= 5;
-    },
-  },
-  {
-    id: ShopUpgrade.AutoRoll,
-    name: 'Unlock auto roll upgrade',
-    baseCost: 100,
+    id: Upgrade.CardDraw,
+    name: 'Unlock cards',
+    baseCost: 250,
     costMultiplier: 0,
-    value: 0,
+    valueFn: () => 0,
     levels: 1,
     resourceType: ResourceType.Coins,
   },
   {
-    id: ShopUpgrade.CoinGainMultiplier,
+    id: Upgrade.PairMultiplier,
+    name: 'Pair combo multiplier',
+    baseCost: 1,
+    costMultiplier: 2,
+    valueFn: (gameState) =>
+      1.3 ** gameState!.upgradeLevels[Upgrade.PairMultiplier],
+    levels: 5,
+    resourceType: ResourceType.Coins,
+  },
+  {
+    id: Upgrade.TwoPairsMultiplier,
+    name: 'Two pairs combo multiplier',
+    baseCost: 10,
+    costMultiplier: 5,
+    valueFn: () => 0.6,
+    levels: 5,
+    resourceType: ResourceType.Coins,
+    conditionsFn: (gameState) => {
+      return gameState.stats.payouts >= 3;
+    },
+  },
+  {
+    id: Upgrade.ThreeOfAKindMultiplier,
+    name: 'Three of a kind combo multiplier',
+    baseCost: 100,
+    costMultiplier: 10,
+    valueFn: () => 0.9,
+    levels: 5,
+    resourceType: ResourceType.Coins,
+    conditionsFn: (gameState) => {
+      return gameState.stats.payouts >= 5;
+    },
+  },
+  {
+    id: Upgrade.AutoRoll,
+    name: 'Unlock auto roll upgrade',
+    baseCost: 100,
+    costMultiplier: 0,
+    valueFn: () => 0,
+    levels: 1,
+    resourceType: ResourceType.Coins,
+  },
+  {
+    id: Upgrade.CoinGainMultiplier,
     name: 'Coin gain multiplier',
     baseCost: 10,
     costMultiplier: 10,
-    value: 2,
+    valueFn: (gameState) =>
+      2 ** gameState!.upgradeLevels[Upgrade.CoinGainMultiplier],
     levels: 5,
     resourceType: ResourceType.Coins,
   },
@@ -126,5 +165,6 @@ export const UPGRADE_VALUES: Array<UpgradeProperties> = [
   ...COINS_UPGRADES,
 ];
 
-export const UPGRADE_MAP: Map<Upgrade | ShopUpgrade, UpgradeProperties> =
-  new Map(UPGRADE_VALUES.map((upgrade) => [upgrade.id, upgrade]));
+export const UPGRADE_MAP: Map<Upgrade | Upgrade, UpgradeProperties> = new Map(
+  UPGRADE_VALUES.map((upgrade) => [upgrade.id, upgrade]),
+);

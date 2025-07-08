@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { GAME_SETTINGS } from '../../common/consts/game-settings.const.js';
-import { ShopUpgrade } from '../../common/enums/shop-upgrade.enum.js';
+import { Upgrade } from '../../common/enums/upgrade.enum.js';
 import { CalculationResult } from '../../common/model/calculation.model.js';
 import { Dice } from '../../common/model/dice.model.js';
 import { calculateChips } from '../../common/utils/chip-calculator.js';
@@ -31,8 +31,7 @@ export default function RollButton({
     (state: { gamestate: GameState }) => state.gamestate,
   );
 
-  const autoRollUnlocked =
-    gameState.shopUpgradeLevels[ShopUpgrade.AutoRoll] > 0;
+  const autoRollUnlocked = gameState.upgradeLevels[Upgrade.AutoRoll] > 0;
 
   const [isCooldown, setIsCooldown] = useState(0);
   const [cooldownPercent, setCooldownPercent] = useState(0);
@@ -49,6 +48,8 @@ export default function RollButton({
     onRollResult(undefined);
     const diceArray: Dice[] = [];
     const dicesAmount = getDiceAmount(gameState);
+    console.log(`Rolling ${dicesAmount} dices...`);
+
     const cooldown = getCooldown(gameState);
 
     for (let i = 0; i < dicesAmount; i++) {

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { GAME_SETTINGS } from '../../common/consts/game-settings.const.js';
 import { Achievement } from '../../common/enums/achievement.enum.js';
 import { getCoinReward } from '../../common/utils/coin-helper.js';
-import { formatNumber } from '../../common/utils/formatter.js';
+import { formatBigNumber } from '../../common/utils/formatter.js';
 import { GameState } from '../../store/model/game-state.model.js';
 import ResultModal from '../main/ResultModal.js';
 
@@ -36,11 +36,11 @@ export default function ChipCounter() {
     <>
       <section>
         <p className="chips">
-          Chips: {formatNumber(chips)}
+          Chips: {formatBigNumber(chips)}
           <br />
           <span className="wincon-label">
             {' '}
-            ({formatNumber(GAME_SETTINGS.winCondition)} chips for payout)
+            ({formatBigNumber(GAME_SETTINGS.winCondition)} chips for payout)
           </span>
           {chips100Achievement && (
             <span>

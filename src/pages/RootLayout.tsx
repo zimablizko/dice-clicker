@@ -2,10 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
 import ChipCounter from '../components/header/ChipCounter.js';
-import Header from '../components/header/Header.js';
-import MainNavigation from '../components/header/MainNavigation.js';
 import AchievementListener from '../components/main/AchievementListener.js';
 import Snackbar from '../components/Snackbar.js';
+import Topbar from '../components/Topbar.js';
 import { hideSnackbar, SnackbarState } from '../store/snackbar-state.js';
 
 export default function RootLayout() {
@@ -16,9 +15,8 @@ export default function RootLayout() {
 
   return (
     <>
+      <Topbar />
       <header>
-        <Header />
-        <MainNavigation />
         <ChipCounter />
       </header>
       <main>
