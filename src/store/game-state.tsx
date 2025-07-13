@@ -54,7 +54,7 @@ const gameStateSlice = createSlice({
       const savedUpgradeLevels = { ...state.upgradeLevels };
       for (const upgrade in state.upgradeLevels) {
         if (
-          UPGRADE_MAP.get(upgrade as Upgrade)?.resourceType !==
+          UPGRADE_MAP.get(upgrade as Upgrade)?.resourceType ===
           ResourceType.Chips
         ) {
           savedUpgradeLevels[upgrade as Upgrade] = 0;

@@ -14,6 +14,7 @@ export enum Upgrade {
   ChipsMultiplierFromBestRoll = 'chipsMultiplierFromBestRollUpgrade',
   ChipsMultiplierFromTotalAchievements = 'chipsMultiplierFromTotalAchievementsUpgrade',
   ChipsMultiplierFromTotalPlaytime = 'chipsMultiplierFromTotalPlaytimeUpgrade',
+  ChipsMultiplierForEachSixValue = 'chipsMultiplierForEachSixValueUpgrade',
   AutoRoll = 'autoRollUnlock',
   CardDraw = 'cardDrawUnlock',
 }

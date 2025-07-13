@@ -93,6 +93,18 @@ const CHIPS_UPGRADES: Array<UpgradeProperties> = [
     // conditionsFn: (gameState) =>
     //   gameState.upgradeLevels[Upgrade.MediumChipsMultiplier] >= 1,
   },
+
+  {
+    id: Upgrade.ChipsMultiplierForEachSixValue,
+    name: '',
+    descriptionFn: () =>
+      'Multiplier x1.5 to chips, based on each dice showing 6',
+    baseCost: 100000,
+    costMultiplier: 0,
+    valueFn: () => 1.5,
+    levels: 1,
+    resourceType: ResourceType.Chips,
+  },
 ];
 
 const COINS_UPGRADES: Array<UpgradeProperties> = [
