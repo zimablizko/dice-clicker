@@ -4,7 +4,7 @@ export const GAME_SETTINGS = {
   baseRollCooldown: 1500,
   baseAutoRollCooldown: 5000,
   baseCoinReward: 1,
-  winCondition: 100000,
+  payoutCondition: 100000,
   baseCardCost: 100,
   baseCardCostIncrease: 1.15,
 };

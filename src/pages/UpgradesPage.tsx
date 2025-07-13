@@ -61,12 +61,6 @@ export default function UpgradesPage() {
                 </p>
               )}
 
-              {/* {upgrade.levels > 1 && (
-                <p className="name">
-                  (LVL {gameState.upgradeLevels[upgrade.id as Upgrade]})
-                </p>
-              )} */}
-
               <p className="name">
                 {checkUpgradeAcquired(upgrade) && '(Acquired)'}
                 {!checkUpgradeAcquired(upgrade) &&

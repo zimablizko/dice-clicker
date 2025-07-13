@@ -170,6 +170,16 @@ const COINS_UPGRADES: Array<UpgradeProperties> = [
     levels: 5,
     resourceType: ResourceType.Coins,
   },
+  {
+    id: Upgrade.PayoutReduction,
+    name: 'Payout condition reduction',
+    baseCost: 10,
+    costMultiplier: 10,
+    valueFn: (gameState) =>
+      1.2 ** gameState!.upgradeLevels[Upgrade.PayoutReduction],
+    levels: 5,
+    resourceType: ResourceType.Coins,
+  },
 ];
 
 export const UPGRADE_VALUES: Array<UpgradeProperties> = [

@@ -4,6 +4,7 @@ import { GAME_SETTINGS } from '../../common/consts/game-settings.const.js';
 import { Achievement } from '../../common/enums/achievement.enum.js';
 import { getCoinReward } from '../../common/utils/coin-helper.js';
 import { formatBigNumber } from '../../common/utils/formatter.js';
+import { getPayoutCondition } from '../../common/utils/layers-helper.js';
 import { GameState } from '../../store/model/game-state.model.js';
 import ResultModal from '../main/ResultModal.js';
 
@@ -29,9 +30,9 @@ export default function ChipCounter() {
   };
 
   const checkWinCondition = () =>
-    gameState.resources.chips >= GAME_SETTINGS.winCondition;
+    gameState.resources.chips >= getPayoutCondition(gameState);
 
-  const winPercent = (chips / GAME_SETTINGS.winCondition) * 100;
+  const winPercent = (chips / getPayoutCondition(gameState)) * 100;
   return (
     <>
       <section>
@@ -40,7 +41,7 @@ export default function ChipCounter() {
           <br />
           <span className="wincon-label">
             {' '}
-            ({formatBigNumber(GAME_SETTINGS.winCondition)} chips for payout)
+            ({formatBigNumber(getPayoutCondition(gameState))} chips for payout)
           </span>
           {chips100Achievement && (
             <span>
@@ -48,7 +49,7 @@ export default function ChipCounter() {
               <progress
                 className="wincon-progress-bar"
                 value={chips}
-                max={GAME_SETTINGS.winCondition}
+                max={GAME_SETTINGS.payoutCondition}
               ></progress>
               <br />
               {winPercent.toFixed(2)}% to payout

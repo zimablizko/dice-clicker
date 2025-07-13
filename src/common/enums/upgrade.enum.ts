@@ -8,6 +8,7 @@ export enum Upgrade {
   ThreeOfAKindMultiplier = 'threeOfAKindMultiplierUpgrade',
   CoinGainMultiplier = 'coinGainMultiplierUpgrade',
   ComboMultiplier = 'comboMultiplierUpgrade',
+  PayoutReduction = 'payoutReductionUpgrade',
 
   //one time upgrades
   ChipsMultiplierFromTotalRolls = 'chipsMultiplierFromTotalRollsUpgrade',

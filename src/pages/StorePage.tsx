@@ -57,15 +57,9 @@ export default function StorePage() {
               <p className="name">{upgrade.name}</p>
               {upgrade.valueFn(gameState) !== 0 && (
                 <p className="name">
-                  Current: {formatDecimal(upgrade.valueFn(gameState))}
+                  Current: x{formatDecimal(upgrade.valueFn(gameState))}
                 </p>
               )}
-
-              {/* {upgrade.levels > 1 && (
-                            <p className="name">
-                              (LVL {gameState.shopUpgradeLevels[upgrade.id as ShopUpgrade]})
-                            </p>
-                          )} */}
 
               <p className="name">
                 {checkUpgradeAcquired(upgrade) && '(Acquired)'}
