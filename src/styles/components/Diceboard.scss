@@ -6,6 +6,9 @@
   min-height: 150px;
 
   .dice {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,6 +19,7 @@
     animation: roll 1.2s ease-in-out 1;
     color: black;
     user-select: none;
+    border-radius: 7px;
 
     @keyframes roll {
       0% {
