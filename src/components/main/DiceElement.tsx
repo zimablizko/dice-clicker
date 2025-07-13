@@ -3,14 +3,8 @@ type DiceProps = {
 };
 
 function DiceElement({ dice }: DiceProps) {
-  return (
-    <div
-      className="dice"
-      style={{
-        backgroundImage: `url('dice-clicker/icons/dice-${dice.diceValue}.svg')`,
-      }}
-    ></div>
-  );
+  const diceClass = `dice n-${dice.diceValue}`;
+  return <div className={diceClass}></div>;
 }
 
 export default DiceElement;

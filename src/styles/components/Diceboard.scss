@@ -21,6 +21,30 @@
     user-select: none;
     border-radius: 7px;
 
+    &.n-1 {
+      background-image: url('/icons/dice-1.svg');
+    }
+
+    &.n-2 {
+      background-image: url('/icons/dice-2.svg');
+    }
+
+    &.n-3 {
+      background-image: url('/icons/dice-3.svg');
+    }
+
+    &.n-4 {
+      background-image: url('/icons/dice-4.svg');
+    }
+
+    &.n-5 {
+      background-image: url('/icons/dice-5.svg');
+    }
+
+    &.n-6 {
+      background-image: url('/icons/dice-6.svg');
+    }
+
     @keyframes dice-value {
       0% {
         background-image: url('/icons/dice-1.svg');
