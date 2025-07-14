@@ -1,60 +1,67 @@
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Achievement } from '../../common/enums/achievement.enum.js';
 import { GameState } from '../../store/model/game-state.model.js';
+import { setActiveTab } from '../../store/ui-state.js'; // New slice
+
+export type TabType = 'home' | 'upgrades' | 'store' | 'achievements' | 'options';
 
 function MainNavigation() {
+  const dispatch = useDispatch();
+  const activeTab = useSelector((state: { ui: UIState }) => state.ui.activeTab);
   const payout1 = useSelector(
     (state: { gamestate: GameState }) =>
       state.gamestate.achievements[Achievement.Payout1],
   );
+
+  const handleTabClick = (tab: TabType) => {
+    dispatch(setActiveTab(tab));
+  };
 
   return (
     <section className="navigation">
       <nav>
         <ul className="list">
           <li>
-            <NavLink
-              to="/dice-clicker"
-              className={({ isActive }) => (isActive ? 'active' : undefined)}
-              end
+            <button
+              className={activeTab === 'home' ? 'active' : ''}
+              onClick={() => handleTabClick('home')}
             >
               Home
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              to="/dice-clicker/upgrades"
-              className={({ isActive }) => (isActive ? 'active' : undefined)}
+            <button
+              className={activeTab === 'upgrades' ? 'active' : ''}
+              onClick={() => handleTabClick('upgrades')}
             >
               Upgrades
-            </NavLink>
+            </button>
           </li>
           {payout1 && (
             <li>
-              <NavLink
-                to="/dice-clicker/store"
-                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              <button
+                className={activeTab === 'store' ? 'active' : ''}
+                onClick={() => handleTabClick('store')}
               >
                 Store
-              </NavLink>
+              </button>
             </li>
           )}
           <li>
-            <NavLink
-              to="/dice-clicker/achievements"
-              className={({ isActive }) => (isActive ? 'active' : undefined)}
+            <button
+              className={activeTab === 'achievements' ? 'active' : ''}
+              onClick={() => handleTabClick('achievements')}
             >
               Achievements
-            </NavLink>
+            </button>
           </li>
           <li>
-            <NavLink
-              to="/dice-clicker/options"
-              className={({ isActive }) => (isActive ? 'active' : undefined)}
+            <button
+              className={activeTab === 'options' ? 'active' : ''}
+              onClick={() => handleTabClick('options')}
             >
               Options
-            </NavLink>
+            </button>
           </li>
         </ul>
       </nav>
