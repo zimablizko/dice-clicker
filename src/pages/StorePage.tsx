@@ -35,7 +35,7 @@ export default function StorePage() {
   return (
     <>
       <div className="row">
-        <p>Coins: {gameState.resources.coins}</p>
+        <span>Coins: {formatBigNumber(gameState.resources.coins)}</span>
       </div>
       <div className="row">
         <div className="upgrades-container">

@@ -27,6 +27,9 @@ const uiSlice = createSlice({
         state.visibleTabs = [action.payload];
       } else {
         if (!state.visibleTabs.includes(action.payload)) {
+          if (state.visibleTabs.length >= 2) {
+            state.visibleTabs.pop();
+          }
           state.visibleTabs.push(action.payload);
         }
       }

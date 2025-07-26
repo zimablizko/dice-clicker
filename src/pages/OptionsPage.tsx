@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { formatBigNumber } from '../common/utils/formatter.js';
 import { reset } from '../store/game-state.js';
 import { GameState } from '../store/model/game-state.model.js';
 
@@ -24,10 +25,10 @@ export default function OptionsPage() {
 
       <div className="row">
         <h2>Stats</h2>
-        <span>Coins: {gameState.resources.coins}</span>
-        <span>Max chips: {gameState.stats.maxChips}</span>
-        <span>Payouts: {gameState.stats.payouts}</span>
-        <span>Best roll: {gameState.stats.bestRoll}</span>
+        <span>Coins: {formatBigNumber(gameState.resources.coins)}</span>
+        <span>Max chips: {formatBigNumber(gameState.stats.maxChips)}</span>
+        <span>Payouts: {formatBigNumber(gameState.stats.payouts)}</span>
+        <span>Best roll: {formatBigNumber(gameState.stats.bestRoll)}</span>
         <span>Rolls: {gameState.stats.diceRolls}</span>
         <span>
           Time played this payout: {gameState.stats.firstLayerTimePlayed}{' '}
