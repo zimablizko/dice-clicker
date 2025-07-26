@@ -8,12 +8,14 @@ export enum Upgrade {
   ThreeOfAKindMultiplier = 'threeOfAKindMultiplierUpgrade',
   CoinGainMultiplier = 'coinGainMultiplierUpgrade',
   ComboMultiplier = 'comboMultiplierUpgrade',
+  PayoutReduction = 'payoutReductionUpgrade',
 
   //one time upgrades
   ChipsMultiplierFromTotalRolls = 'chipsMultiplierFromTotalRollsUpgrade',
   ChipsMultiplierFromBestRoll = 'chipsMultiplierFromBestRollUpgrade',
   ChipsMultiplierFromTotalAchievements = 'chipsMultiplierFromTotalAchievementsUpgrade',
   ChipsMultiplierFromTotalPlaytime = 'chipsMultiplierFromTotalPlaytimeUpgrade',
+  ChipsMultiplierForEachSixValue = 'chipsMultiplierForEachSixValueUpgrade',
   AutoRoll = 'autoRollUnlock',
   CardDraw = 'cardDrawUnlock',
 }

@@ -5,6 +5,7 @@ import { CardEffectType } from '../enums/card-effect.enum.js';
 import { Combo } from '../enums/combo.enum.js';
 import { Upgrade } from '../enums/upgrade.enum.js';
 import { CalculationResult } from '../model/calculation.model.js';
+import { Dice } from '../model/dice.model.js';
 import { getCardEffectValue } from './card-helper.js';
 
 const flatMultiplierUpgrades = [
@@ -19,17 +20,19 @@ const flatComboMultiplierUpgrades = [Upgrade.ComboMultiplier];
 const pairComboUpgrades = [Upgrade.PairMultiplier];
 
 export const calculateChips = (
-  baseValue: number,
+  diceArray: Dice[],
   combo: Combo,
   gameState: GameState,
 ): CalculationResult => {
-  let result = baseValue;
+  const baseValue = diceArray.reduce((prev, curr) => prev + curr.diceValue, 0);
   const comboProperties = COMBO_VALUES.get(combo)!;
   const comboMultiplier = getComboMultiplier(gameState, combo);
   const upgradeMultiplier = getFlatMultiplier(gameState);
+  const specialMultiplier = getSpecialMultiplier(gameState, diceArray);
   const finalMultiplier =
-    Math.round(comboMultiplier * upgradeMultiplier * 100) / 100;
-  result = Math.round(result * finalMultiplier);
+    Math.round(comboMultiplier * upgradeMultiplier * specialMultiplier * 100) /
+    100;
+  const result = Math.round(baseValue * finalMultiplier);
   return {
     baseValue,
     comboProperties,
@@ -88,4 +91,22 @@ export const getComboMultiplier = (
       break;
   }
   return comboMultiplier;
+};
+
+export const getSpecialMultiplier = (
+  gameState: GameState,
+  diceArray: Dice[],
+): number => {
+  let specialMultiplier = 1;
+  if (gameState.upgradeLevels[Upgrade.ChipsMultiplierForEachSixValue] > 0) {
+    const sixesCount = diceArray.filter((dice) => dice.diceValue === 6).length;
+    if (sixesCount > 0) {
+      specialMultiplier *=
+        UPGRADE_MAP.get(Upgrade.ChipsMultiplierForEachSixValue)!.valueFn(
+          gameState,
+        ) * sixesCount;
+    }
+  }
+
+  return specialMultiplier;
 };

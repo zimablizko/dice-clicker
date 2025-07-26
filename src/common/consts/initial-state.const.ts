@@ -28,3 +28,8 @@ export const INITIAL_STATE: GameState = {
   cards: [],
   cardDrawPrice: 10,
 };
+
+export const DEBUG_INITIAL_STATE: GameState = {
+  ...INITIAL_STATE,
+  resources: { chips: 1000000, coins: 1000000 },
+};

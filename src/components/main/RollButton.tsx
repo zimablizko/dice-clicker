@@ -48,7 +48,6 @@ export default function RollButton({
     onRollResult(undefined);
     const diceArray: Dice[] = [];
     const dicesAmount = getDiceAmount(gameState);
-    console.log(`Rolling ${dicesAmount} dices...`);
 
     const cooldown = getCooldown(gameState);
 
@@ -57,12 +56,8 @@ export default function RollButton({
     }
     const combo = checkForCombo(diceArray);
     onDicesChange(diceArray);
-    const dicesValue = diceArray.reduce(
-      (prev, curr) => prev + curr.diceValue,
-      0,
-    );
 
-    const res = calculateChips(dicesValue, combo, gameState);
+    const res = calculateChips(diceArray, combo, gameState);
 
     setIsCooldown(cooldown);
 

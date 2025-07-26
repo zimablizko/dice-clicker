@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GAME_SETTINGS } from '../common/consts/game-settings.const.js';
-import { INITIAL_STATE } from '../common/consts/initial-state.const.js';
+import {
+  DEBUG_INITIAL_STATE,
+  INITIAL_STATE,
+} from '../common/consts/initial-state.const.js';
 import { UPGRADE_MAP } from '../common/consts/upgrade-values.const.js';
 import { Achievement } from '../common/enums/achievement.enum.js';
 import { ResourceType } from '../common/enums/resource-type.enum.js';
@@ -9,7 +12,8 @@ import { Card } from '../common/model/card.model.js';
 import { saveManager } from '../common/utils/save-manager.js';
 import { GameState, GameStats, StateAction } from './model/game-state.model.js';
 
-const initialState = INITIAL_STATE;
+const debugMode = import.meta.env.VITE_DEBUG_MODE === 'true';
+const initialState = debugMode ? DEBUG_INITIAL_STATE : INITIAL_STATE;
 
 const gameStateSlice = createSlice({
   name: 'gameState',
@@ -54,7 +58,7 @@ const gameStateSlice = createSlice({
       const savedUpgradeLevels = { ...state.upgradeLevels };
       for (const upgrade in state.upgradeLevels) {
         if (
-          UPGRADE_MAP.get(upgrade as Upgrade)?.resourceType !==
+          UPGRADE_MAP.get(upgrade as Upgrade)?.resourceType ===
           ResourceType.Chips
         ) {
           savedUpgradeLevels[upgrade as Upgrade] = 0;

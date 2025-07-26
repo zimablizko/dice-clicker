@@ -3,7 +3,8 @@ type DiceProps = {
 };
 
 function DiceElement({ dice }: DiceProps) {
-  return <div className="dice">{dice.diceValue}</div>;
+  const diceClass = `dice n-${dice.diceValue}`;
+  return <div className={diceClass}></div>;
 }
 
 export default DiceElement;
